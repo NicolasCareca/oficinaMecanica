@@ -1,32 +1,34 @@
-<h1>Ordens de Serviço</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Veículo</th>
-      <th>Cliente</th>
-      <th>Serviço</th>
-      <th>Peça</th>
-      <th>Equipe</th>
-      <th>Valor</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @ordem_servicos.each do |ordem_servico| %>
+<div class="container mt-4">
+  <h1 class="mb-4">Ordens de Serviço</h1>
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
       <tr>
-        <td><%= ordem_servico.veiculo.modelo %></td>
-        <td><%= ordem_servico.cliente.nome %></td>
-        <td><%= ordem_servico.servico.nome %></td>
-        <td><%= ordem_servico.peca.nome if ordem_servico.peca %></td>
-        <td><%= ordem_servico.equipe.descricao %></td>
-        <td><%= number_to_currency(ordem_servico.valor) %></td>
-        <td>
-          <%= link_to 'Ver', ordem_servico %>
-          <%= link_to 'Editar', edit_ordem_servico_path(ordem_servico) %>
-          <%= link_to 'Excluir', ordem_servico, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
+        <th>Veículo</th>
+        <th>Cliente</th>
+        <th>Serviço</th>
+        <th>Peça</th>
+        <th>Equipe</th>
+        <th>Valor</th>
+        <th>Ações</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= link_to 'Nova Ordem de Serviço', new_ordem_servico_path %>
+    </thead>
+    <tbody>
+      <% @ordem_servicos.each do |ordem_servico| %>
+        <tr>
+          <td><%= ordem_servico.veiculo.modelo %></td>
+          <td><%= ordem_servico.cliente.nome %></td>
+          <td><%= ordem_servico.servico.nome %></td>
+          <td><%= ordem_servico.peca.nome if ordem_servico.peca %></td>
+          <td><%= ordem_servico.equipe.descricao %></td>
+          <td><%= number_to_currency(ordem_servico.valor) %></td>
+          <td>
+            <%= link_to 'Ver', ordem_servico, class: 'btn btn-info btn-sm me-1' %>
+            <%= link_to 'Editar', edit_ordem_servico_path(ordem_servico), class: 'btn btn-warning btn-sm me-1' %>
+            <%= link_to 'Concluir', ordem_servico, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm', remote: true %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Nova Ordem de Serviço', new_ordem_servico_path, class: 'btn btn-primary' %>
+</div>

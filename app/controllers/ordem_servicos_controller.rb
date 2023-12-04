@@ -57,4 +57,7 @@ class OrdemServicosController < ApplicationController
     params.require(:ordem_servico).permit(:veiculo_id, :cliente_id, :servico_id, :peca_id, :equipe_id, :valor)
     # Adicione os outros parâmetros necessários para a ordem de serviço (data, status, etc.)
   end
+
+
+
 end
