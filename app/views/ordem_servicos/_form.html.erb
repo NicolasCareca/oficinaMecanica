@@ -1,0 +1,29 @@
+<%= form_with(model: @ordem_servico, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :veiculo_id, 'Veículo' %>
+    <%= form.collection_select :veiculo_id, @veiculos, :id, :modelo, prompt: 'Selecione um veículo' %>
+  </div>
+  <div class="field">
+    <%= form.label :cliente_id, 'Cliente' %>
+    <%= form.collection_select :cliente_id, @clientes, :id, :nome, prompt: 'Selecione um cliente' %>
+  </div>
+  <div class="field">
+    <%= form.label :servico_id, 'Serviço' %>
+    <%= form.collection_select :servico_id, @servicos, :id, :nome, prompt: 'Selecione um serviço' %>
+  </div>
+  <div class="field">
+    <%= form.label :peca_id, 'Peça' %>
+    <%= form.collection_select :peca_id, @pecas, :id, :nome, prompt: 'Selecione uma peça' %>
+  </div>
+  <div class="field">
+    <%= form.label :equipe_id, 'Equipe' %>
+    <%= form.collection_select :equipe_id, @equipes, :id, :descricao, prompt: 'Selecione uma equipe' %>
+  </div>
+  <div class="field">
+    <%= form.label :valor, 'Valor' %>
+    <%= form.text_field :valor %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

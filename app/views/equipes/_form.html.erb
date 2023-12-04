@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <div class="card mx-auto col-6" >
+    <div class="card-header">
+      <h5 class="card-title text-center">Equipe Form</h5>
+    </div>
+    <div class="card-body">
+      <%= form_with(model: equipe, local: true) do |form| %>
+        <% if equipe.errors.any? %>
+          <div class="alert alert-danger">
+            <h6><%= pluralize(equipe.errors.count, "error") %> prohibited this equipe from being saved:</h6>
+            <ul>
+              <% equipe.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= form.label :nome, class: "form-label" %>
+          <%= form.text_field :nome, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :descricao, class: "form-label" %>
+          <%= form.text_field :descricao, class: "form-control" %>
+        </div>
+
+        <div class="text-center">
+          <%= form.submit class: "btn btn-primary col-6" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

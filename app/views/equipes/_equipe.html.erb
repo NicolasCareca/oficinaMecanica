@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <div class="card mx-auto col-6">
+    <div class="card-header">
+      <h5 class="card-title text-center">Equipe Details</h5>
+    </div>
+    <div class="card-body">
+      <div id="<%= dom_id equipe %>">
+        <p>
+          <strong>Nome:</strong>
+          <%= equipe.nome %>
+        </p>
+
+        <p>
+          <strong>Mecânicos:</strong>
+          <ul>
+            <% equipe.mecanicos.each do |mecanico| %>
+              <li><%= mecanico.nome %></li>
+            <% end %>
+          </ul>
+        </p>
+
+        <p>
+          <strong>Descrição:</strong>
+          <%= equipe.descricao %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

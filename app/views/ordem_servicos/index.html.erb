@@ -1,0 +1,32 @@
+<h1>Ordens de Serviço</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Veículo</th>
+      <th>Cliente</th>
+      <th>Serviço</th>
+      <th>Peça</th>
+      <th>Equipe</th>
+      <th>Valor</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ordem_servicos.each do |ordem_servico| %>
+      <tr>
+        <td><%= ordem_servico.veiculo.modelo %></td>
+        <td><%= ordem_servico.cliente.nome %></td>
+        <td><%= ordem_servico.servico.nome %></td>
+        <td><%= ordem_servico.peca.nome if ordem_servico.peca %></td>
+        <td><%= ordem_servico.equipe.descricao %></td>
+        <td><%= number_to_currency(ordem_servico.valor) %></td>
+        <td>
+          <%= link_to 'Ver', ordem_servico %>
+          <%= link_to 'Editar', edit_ordem_servico_path(ordem_servico) %>
+          <%= link_to 'Excluir', ordem_servico, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Nova Ordem de Serviço', new_ordem_servico_path %>

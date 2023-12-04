@@ -1,0 +1,8 @@
+<h1>Ordem de Serviço</h1>
+<p><strong>Veículo:</strong> <%= @ordem_servico.veiculo.modelo %></p>
+<p><strong>Cliente:</strong> <%= @ordem_servico.cliente.nome %></p>
+<p><strong>Serviço:</strong> <%= @ordem_servico.servico.nome %></p>
+<p><strong>Peça:</strong> <%= @ordem_servico.peca.nome if @ordem_servico.peca %></p>
+<p><strong>Equipe:</strong> <%= @ordem_servico.equipe.descricao %></p>
+<p><strong>Valor:</strong> <%= number_to_currency(@ordem_servico.valor) %></p>
+<%= link_to 'Voltar', ordem_servicos_path %>

@@ -1,0 +1,39 @@
+<%= form_with(model: veiculo) do |form| %>
+  <!-- Se houver erros, exiba uma mensagem -->
+  <% if veiculo.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(veiculo.errors.count, "error") %> prohibited this veiculo from being saved:</h2>
+      <ul>
+        <% veiculo.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Campos do formulário -->
+  <div>
+    <%= form.label :modelo, style: "display: block" %>
+    <%= form.text_field :modelo %>
+  </div>
+
+  <div>
+    <%= form.label :placa, style: "display: block" %>
+    <%= form.text_field :placa %>
+  </div>
+
+  <div>
+    <%= form.label :cor, style: "display: block" %>
+    <%= form.text_field :cor %>
+  </div>
+ <div class="field">
+  <%= form.label :cliente_id %>
+  <%= form.collection_select(:cliente_id, @clientes, :id, :nome, prompt: true) %>
+</div>
+
+
+  <!-- Botão de envio -->
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

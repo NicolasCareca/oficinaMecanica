@@ -1,0 +1,43 @@
+<div class="card mt-5 col-6 mx-auto">
+  <div class="card">
+    <div class="card-body">
+      <%= form_with(model: mecanico, class: "mt-5") do |form| %>
+        <% if mecanico.errors.any? %>
+          <div class="alert alert-danger">
+            <h2><%= pluralize(mecanico.errors.count, "error") %> prohibited this mecanico from being saved:</h2>
+
+            <ul>
+              <% mecanico.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= form.label :nome, class: "form-label" %>
+          <%= form.text_field :nome, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :funcao, class: "form-label" %>
+          <%= form.text_field :funcao, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :especialidade, class: "form-label" %>
+          <%= form.text_field :especialidade, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :equipe_id, class: "form-label" %>
+          <%= form.collection_select(:equipe_id, Equipe.all, :id, :nome, { prompt: 'Selecione a equipe' }, { class: 'form-select' }) %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.submit class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

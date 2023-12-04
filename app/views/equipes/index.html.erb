@@ -1,0 +1,22 @@
+<div>
+  <h1 class="text-center">Equipes</h1>
+
+  <div id="equipes">
+    <% if @equipes.present? %>
+      <% @equipes.each do |equipe| %>
+        <%= render equipe %>
+        <p>
+          <div class="text-center">
+            <%= link_to "Show this equipe", equipe, class: "btn btn-secondary", style: "margin-top: 10px;" %>
+          </div>
+        </p>
+      <% end %>
+    <% else %>
+      <p>No equipes found.</p>
+    <% end %>
+  </div>
+
+  <div class="text-center">
+    <%= link_to "New equipe", new_equipe_path, class: "btn btn-primary", style: "margin-top: 10px;" %>
+  </div>
+</div>
