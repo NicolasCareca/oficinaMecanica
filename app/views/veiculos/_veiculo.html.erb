@@ -1,22 +1,32 @@
-<div id="<%= dom_id veiculo %>">
-  <p>
-    <strong>Modelo:</strong>
-    <%= veiculo.modelo %>
-  </p>
+<div class="container mt-4">
+  <div class="card col-8 mx-auto">
+  
+      <div id="<%= dom_id veiculo %>" class="card">
+        <div class="card-body">
+          <h5 class="card-title">Detalhes do Veículo</h5>
 
-  <p>
-    <strong>Placa:</strong>
-    <%= veiculo.placa %>
-  </p>
+          <p class="card-text">
+            <strong>Modelo:</strong>
+            <%= veiculo.modelo %>
+          </p>
 
-  <p>
-    <strong>Cor:</strong>
-    <%= veiculo.cor %>
-  </p>
+          <p class="card-text">
+            <strong>Placa:</strong>
+            <%= veiculo.placa %>
+          </p>
 
-  <p>
-    <strong>Dono:</strong>
-    <%= veiculo.cliente.nome if veiculo.cliente %>
-  </p>
+          <p class="card-text">
+            <strong>Cor:</strong>
+            <%= veiculo.cor %>
+          </p>
 
-</div>
+          <p class="card-text">
+            <strong>Dono:</strong>
+            <%= veiculo.cliente.nome if veiculo.cliente %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

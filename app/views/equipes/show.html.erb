@@ -3,7 +3,7 @@
 <%= render @equipe %>
 
 <div class="text-center mt-3">
-  <%= link_to "Edit this equipe", edit_equipe_path(@equipe), class: "btn btn-primary mr-2" %>
-  <%= link_to "Back to equipes", equipes_path, class: "btn btn-secondary mr-2" %>
-  <%= button_to "Destroy this equipe", @equipe, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+  <%= link_to "Editar", edit_equipe_path(@equipe), class: "btn btn-primary mr-2" %>
+  <%= link_to "voltar", equipes_path, class: "btn btn-secondary mr-2" %>
+  <%= button_to "excluir", @equipe, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mt-3" %>
 </div>

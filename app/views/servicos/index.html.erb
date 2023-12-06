@@ -1,17 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Servicos</h1>
+<h1 class="text-center">Servicos</h1>
 
-<div id="servicos">
+<div id="servicos" class="container mt-4 ">
   <% @servicos.each do |servico| %>
-    <div>
-      <p>Nome: <%= servico.nome %></p>
-      <p>Valor: <%= servico.valor %></p>
+    <div class="card col-8 mb-3 mx-auto">
+      <div class="card-body">
+        <h5 class="card-title">Nome: <%= servico.nome %></h5>
+        <p class="card-text">Valor: <%= servico.valor %></p>
+        <a href="<%= servico_path(servico) %>" class="btn btn-primary">Exibir</a>
+      </div>
     </div>
-    <p>
-      <%= link_to "Show this servico", servico %>
-    </p>
   <% end %>
 </div>
-
-<%= link_to "New servico", new_servico_path %>
+<div class="text-center mt-3">
+<%= link_to "New servico", new_servico_path, id: "new-servico-link", class: "btn btn-secondary" %>
+</div>

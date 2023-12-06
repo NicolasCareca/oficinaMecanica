@@ -1,10 +1,10 @@
-<h1>Editing veiculo</h1>
+<div class="container mt-4 text-center">
+  <h1>Editar veiculo</h1>
 
-<%= render "form", veiculo: @veiculo %>
+  <%= render "form", veiculo: @veiculo %>
 
-<br>
-
-<div>
-  <%= link_to "Show this veiculo", @veiculo %> |
-  <%= link_to "Back to veiculos", veiculos_path %>
+  <div class="mt-4">
+    <%= link_to "exibir", @veiculo, class: "btn btn-primary mr-2" %>
+    <%= link_to "voltar", veiculos_path, class: "btn btn-secondary" %>
+  </div>
 </div>

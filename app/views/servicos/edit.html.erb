@@ -1,10 +1,10 @@
-<h1>Editing servico</h1>
+<div class="container mt-4">
+  <h1 class="text-center">Editar Serviço</h1>
 
-<%= render "form", servico: @servico %>
+  <%= render "form", servico: @servico %>
 
-<br>
-
-<div>
-  <%= link_to "Show this servico", @servico %> |
-  <%= link_to "Back to servicos", servicos_path %>
+  <div class="mt-4 text-center">
+    <%= link_to "Exibir", @servico, class: "btn btn-primary mr-2" %>
+    <%= link_to "Voltar", servicos_path, class: "btn btn-secondary" %>
+  </div>
 </div>

@@ -1,9 +1,11 @@
-<h1>New servico</h1>
+<div class="container mt-4 d-flex justify-content-center align-items-center flex-column">
+  <h1 class="mb-4">Novo Servico</h1>
 
-<%= render "form", servico: @servico %>
+  <%= render "form", servico: @servico %>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Back to servicos", servicos_path %>
+  <div>
+    <%= link_to "Voltar", servicos_path, class: "btn btn-secondary" %>
+  </div>
 </div>

@@ -1,10 +1,18 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="alert alert-success" role="alert">
+        <%= notice %>
+      </div>
 
-<%= render @veiculo %>
+      <%= render @veiculo %>
 
-<div>
-  <%= link_to "Edit this veiculo", edit_veiculo_path(@veiculo) %> |
-  <%= link_to "Back to veiculos", veiculos_path %>
+      <div class="mt-3 text-center">
+        <%= link_to "editar", edit_veiculo_path(@veiculo), class: "btn btn-primary" %> |
+        <%= link_to "voltar", veiculos_path, class: "btn btn-secondary" %>
 
-  <%= button_to "Destroy this veiculo", @veiculo, method: :delete %>
+        <%= button_to "deletar", @veiculo, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
 </div>

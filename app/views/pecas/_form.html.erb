@@ -1,28 +1,42 @@
-# app/views/pecas/_form.html.erb
+<div id="<%= dom_id peca %>" class="container mt-4">
+  <div class="card mx-auto col-6">
+    <div class="card-body">
+      <h5 class="card-title">Informações da Peça</h5>
 
-<%= form_with(model: peca, local: true) do |form| %>
+      <%= form_with(model: peca, local: true) do |form| %>
 
+        <% if peca.errors.any? %>
+          <div class="alert alert-danger">
+            <h6><%= pluralize(peca.errors.count, "error") %> proibiu esta peça de ser salva:</h6>
+            <ul>
+              <% peca.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-  <% if peca.errors.any? %>
-    <!-- ... (código de tratamento de erros) ... -->
-  <% end %>
+        <div class="mb-3">
+          <%= form.label :nome, class: "form-label" %>
+          <%= form.text_field :nome, class: "form-control" %>
+        </div>
 
-  <div class="field">
-    <%= form.label :nome %>
-    <%= form.text_field :nome %>
+        <div class="mb-3">
+          <%= form.label :quantidade, class: "form-label" %>
+          <%= form.number_field :quantidade, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :preco, class: "form-label" %>
+          <%= form.number_field :preco, class: "form-control" %>
+        </div>
+
+        <div class="text-center">
+          <%= form.submit "Salvar", class: "btn btn-primary" %>
+        </div>
+
+      <% end %>
+
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :quantidade %>
-    <%= form.number_field :quantidade %>
-  </div>
-
-  <div class="field">
-    <%= form.label :preco %>
-    <%= form.number_field :preco %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

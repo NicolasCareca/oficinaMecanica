@@ -1,16 +1,23 @@
-<div id="<%= dom_id peca %>">
-  <p>
-    <strong>Nome:</strong>
-    <%= peca.nome %>
-  </p>
+<div id="<%= dom_id peca %>" class="container mt-4">
+  <div class="card mx-auto col-6">
+    <div class="card-body">
+      <h5 class="card-title">Detalhes da Peça</h5>
 
-  <p>
-    <strong>Quantidade:</strong>
-    <%= peca.quantidade %>
-  </p>
+      <div class="mb-3">
+        <strong class="form-label">Nome:</strong>
+        <p class="form-control-static"><%= peca.nome %></p>
+      </div>
 
-  <p>
-    <strong>Preco:</strong>
-    <%= peca.preco %>
-  </p>
+      <div class="mb-3">
+        <strong class="form-label">Quantidade:</strong>
+        <p class="form-control-static"><%= peca.quantidade %></p>
+      </div>
+
+      <div class="mb-3">
+        <strong class="form-label">Preço:</strong>
+        <p class="form-control-static"><%= peca.preco %></p>
+      </div>
+
+    </div>
+  </div>
 </div>

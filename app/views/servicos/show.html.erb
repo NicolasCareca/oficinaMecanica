@@ -1,10 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @servico %>
+<div class="text-center">
+  <%= render @servico %>
 
-<div>
-  <%= link_to "Edit this servico", edit_servico_path(@servico) %> |
-  <%= link_to "Back to servicos", servicos_path %>
+  <div>
+    <%= link_to "editar", edit_servico_path(@servico), class: "btn btn-primary" %> |
+    <%= link_to "voltar", servicos_path, class: "btn btn-secondary" %>
 
-  <%= button_to "Destroy this servico", @servico, method: :delete %>
+    <%= button_to "excluir", @servico, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+  </div>
 </div>

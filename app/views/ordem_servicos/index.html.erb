@@ -24,7 +24,9 @@
           <td>
             <%= link_to 'Ver', ordem_servico, class: 'btn btn-info btn-sm me-1' %>
             <%= link_to 'Editar', edit_ordem_servico_path(ordem_servico), class: 'btn btn-warning btn-sm me-1' %>
-            <%= link_to 'Concluir', ordem_servico, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm', remote: true %>
+          <%= link_to 'Concluir', ordem_servico, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm', remote: true %>
+
+
           </td>
         </tr>
       <% end %>

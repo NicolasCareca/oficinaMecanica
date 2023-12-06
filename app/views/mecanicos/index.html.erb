@@ -6,10 +6,10 @@
   <% @mecanicos.each do |mecanico| %>
     <%= render mecanico %>
     <p>
-      <%= link_to "Show this mecanico", mecanico, class: "btn btn-primary" %>
+      <%= link_to "exibir", mecanico, class: "btn btn-primary" %>
     </p>
   <% end %>
 </div>
-
-<%= link_to "New mecanico", new_mecanico_path, class: "btn btn-success" %>
-
+<div class="text-center mt-3">
+<%= link_to "novo mecanico", new_mecanico_path, class: "btn btn-success" %>
+</div>

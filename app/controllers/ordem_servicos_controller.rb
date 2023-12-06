@@ -16,6 +16,7 @@ class OrdemServicosController < ApplicationController
 
   def create
     @ordem_servico = OrdemServico.new(ordem_servico_params)
+    calculate_valor_total(@ordem_servico)
     if @ordem_servico.save
       redirect_to @ordem_servico, notice: 'Ordem de Serviço criada com sucesso.'
     else
@@ -28,6 +29,7 @@ class OrdemServicosController < ApplicationController
 
   def update
     if @ordem_servico.update(ordem_servico_params)
+      calculate_valor_total(@ordem_servico)
       redirect_to @ordem_servico, notice: 'Ordem de Serviço atualizada com sucesso.'
     else
       render :edit
@@ -58,6 +60,15 @@ class OrdemServicosController < ApplicationController
     # Adicione os outros parâmetros necessários para a ordem de serviço (data, status, etc.)
   end
 
+  def calculate_valor_total(ordem_servico)
+    valor_total = 0
 
+    # Adicione o valor das peças associadas à ordem de serviço
+    valor_total += ordem_servico.peca&.preco.to_f if ordem_servico.peca
 
+    # Adicione o valor do serviço associado à ordem de serviço
+    valor_total += ordem_servico.servico&.valor.to_f if ordem_servico.servico
+
+    ordem_servico.update(valor: valor_total)
+  end
 end
