@@ -15,7 +15,7 @@
     <tbody>
       <% @ordem_servicos.each do |ordem_servico| %>
         <tr>
-          <td><%= ordem_servico.veiculo.modelo %></td>
+          <td><%= ordem_servico.veiculo.placa %></td>
           <td><%= ordem_servico.cliente.nome %></td>
           <td><%= ordem_servico.servico.nome %></td>
           <td><%= ordem_servico.peca.nome if ordem_servico.peca %></td>

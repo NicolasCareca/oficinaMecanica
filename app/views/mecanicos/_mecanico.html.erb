@@ -1,20 +1,25 @@
-<div class="card mt-5 col-6 mx-auto">
-  <div class="card-body">
-    <div id="<%= dom_id mecanico %>">
-      <p>
-        <strong>Nome:</strong>
-        <%= mecanico.nome %>
-      </p>
+<div class="table-responsive mt-5 col-6 mx-auto">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th colspan="2" class="text-center">Detalhes do Mecânico</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="font-weight-bold">Nome:</td>
+        <td><%= mecanico.nome %></td>
+      </tr>
 
-      <p>
-        <strong>Especialidade:</strong>
-        <%= mecanico.especialidade %>
-      </p>
+      <tr>
+        <td class="font-weight-bold">Especialidade:</td>
+        <td><%= mecanico.especialidade %></td>
+      </tr>
 
-      <p>
-        <strong>Equipe:</strong>
-        <%= mecanico.equipe.nome %>
-      </p>
-    </div>
-  </div>
+      <tr>
+        <td class="font-weight-bold">Equipe:</td>
+        <td><%= mecanico.equipe.nome %></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

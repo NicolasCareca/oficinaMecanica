@@ -6,7 +6,7 @@
           <%= form_with(model: @ordem_servico, local: true, html: {class: 'needs-validation', novalidate: true}) do |form| %>
             <div class="mb-3">
               <%= form.label :veiculo_id, 'Veículo', class: 'form-label' %>
-              <%= form.collection_select :veiculo_id, @veiculos, :id, :modelo, { prompt: 'Selecione um veículo', class: 'form-select' }, class: 'form-control' %>
+              <%= form.collection_select :veiculo_id, @veiculos, :id, :placa, { prompt: 'Selecione um veículo', class: 'form-select' }, class: 'form-control' %>
             </div>
             <div class="mb-3">
               <%= form.label :cliente_id, 'Cliente', class: 'form-label' %>
