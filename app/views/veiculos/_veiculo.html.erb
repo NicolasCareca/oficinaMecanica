@@ -1,32 +1,34 @@
+ <%= link_to "novo veiculo", new_veiculo_path, class: "btn btn-success mt-4" %>
 <div class="container mt-4">
-  <div class="card col-8 mx-auto">
+
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Modelo</th>
+        <th scope="col">Placa</th>
+        <th scope="col">Cor</th>
+        <th scope="col">Dono</th>
+        <th scope="col">Ações</th> <!-- Nova coluna para ações -->
+      </tr>
+    </thead>
+    <tbody>
+      <% Veiculo.all.each do |veiculo| %>
+        <tr>
+          <td><%= veiculo.modelo %></td>
+          <td><%= veiculo.placa %></td>
+          <td><%= veiculo.cor %></td>
+          <td><%= veiculo.cliente.nome if veiculo.cliente %></td>
+          <td>
+           
+              <%= link_to "exibir", veiculo, class: "btn btn-primary" %>
+          
+          </td>
+        </tr>
+      <% end %>
+      
+    </tbody>
+    
+  </table>
   
-      <div id="<%= dom_id veiculo %>" class="card">
-        <div class="card-body">
-          <h5 class="card-title">Detalhes do Veículo</h5>
-
-          <p class="card-text">
-            <strong>Modelo:</strong>
-            <%= veiculo.modelo %>
-          </p>
-
-          <p class="card-text">
-            <strong>Placa:</strong>
-            <%= veiculo.placa %>
-          </p>
-
-          <p class="card-text">
-            <strong>Cor:</strong>
-            <%= veiculo.cor %>
-          </p>
-
-          <p class="card-text">
-            <strong>Dono:</strong>
-            <%= veiculo.cliente.nome if veiculo.cliente %>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
+</div>
 

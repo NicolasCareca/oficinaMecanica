@@ -8,6 +8,9 @@ class PecasController < ApplicationController
 
   # GET /pecas/1 or /pecas/1.json
   def show
+
+      @peca = Peca.find(params[:id])
+      @pecas = [ @peca]
   end
 
   # GET /pecas/new
@@ -20,7 +23,7 @@ class PecasController < ApplicationController
     @peca = Peca.find(params[:id])
   end
 
-  
+
 
   # POST /pecas or /pecas.json
   def create

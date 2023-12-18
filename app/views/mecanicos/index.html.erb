@@ -1,15 +1,13 @@
 <p class="text-center text-success"><%= notice %></p>
 
 <h1 class="text-center">Mecanicos</h1>
+<div class="text-center mt-3 mb-3">
+  <%= link_to "Novo Mecânico", new_mecanico_path, class: "btn btn-success" %>
+</div>
 
 <div id="mecanicos" class="text-center">
   <% @mecanicos.each do |mecanico| %>
     <%= render mecanico %>
-    <p>
-      <%= link_to "exibir", mecanico, class: "btn btn-primary" %>
-    </p>
   <% end %>
 </div>
-<div class="text-center mt-3">
-<%= link_to "novo mecanico", new_mecanico_path, class: "btn btn-success" %>
-</div>
+

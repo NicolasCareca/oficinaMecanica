@@ -8,6 +8,8 @@ class EquipesController < ApplicationController
 
   # GET /equipes/1 or /equipes/1.json
   def show
+    @equipe = Equipe.find(params[:id])
+    @equipes = [ @equipe ]
   end
 
   # GET /equipes/new

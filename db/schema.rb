@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_04_122002) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_17_205421) do
   create_table "clientes", force: :cascade do |t|
     t.integer "codigo"
     t.string "nome"
@@ -57,14 +57,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_122002) do
     t.date "data_emissao"
     t.decimal "valor"
     t.date "data_conclusao"
-    t.integer "cliente_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "veiculo_id", null: false
     t.integer "servico_id", null: false
     t.integer "peca_id", null: false
     t.integer "equipe_id", null: false
-    t.index ["cliente_id"], name: "index_ordem_servicos_on_cliente_id"
+    t.text "problema"
+    t.string "status"
+    t.text "problema_veiculo"
     t.index ["equipe_id"], name: "index_ordem_servicos_on_equipe_id"
     t.index ["peca_id"], name: "index_ordem_servicos_on_peca_id"
     t.index ["servico_id"], name: "index_ordem_servicos_on_servico_id"
@@ -126,7 +127,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_122002) do
   add_foreign_key "ordem_de_servicos", "pecas"
   add_foreign_key "ordem_de_servicos", "servicos"
   add_foreign_key "ordem_de_servicos", "veiculos"
-  add_foreign_key "ordem_servicos", "clientes"
   add_foreign_key "ordem_servicos", "equipes"
   add_foreign_key "ordem_servicos", "pecas"
   add_foreign_key "ordem_servicos", "servicos"

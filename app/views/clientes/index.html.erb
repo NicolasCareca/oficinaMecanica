@@ -1,16 +1,12 @@
+<!-- /*_index.html.erb*/ -->
+
 <p style="color: green; text-align: center;"><%= notice %></p>
 
 <h1 class="text-center">Clientes</h1>
+ <div class="text-center mt-3 mb-3">
+    <%= link_to "Novo Cliente", new_cliente_path, class: "btn btn-success" %>
+  </div>
+<% @clientes.each do |cliente| %>
+  <%= render cliente %>
+<% end %>
 
-<div id="clientes">
-  <% @clientes.each do |cliente| %>
-    <%= render cliente %>
-    <p class="text-center">
-      <%= link_to "Exibir", cliente, class: "btn btn-primary" %>
-    </p>
-  <% end %>
-</div>
-
-<div class="text-center mt-3">
-  <%= link_to "Novo Cliente", new_cliente_path, class: "btn btn-success" %>
-</div>

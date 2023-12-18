@@ -8,10 +8,11 @@
               <%= form.label :veiculo_id, 'Veículo', class: 'form-label' %>
               <%= form.collection_select :veiculo_id, @veiculos, :id, :placa, { prompt: 'Selecione um veículo', class: 'form-select' }, class: 'form-control' %>
             </div>
-            <div class="mb-3">
-              <%= form.label :cliente_id, 'Cliente', class: 'form-label' %>
-              <%= form.collection_select :cliente_id, @clientes, :id, :nome, { prompt: 'Selecione um cliente', class: 'form-select' }, class: 'form-control' %>
-            </div>
+    <div class="mb-3">
+  <%= form.label :problema_veiculo, 'Problema do Veículo', class: 'form-label' %>
+  <%= form.text_area :problema_veiculo, class: 'form-control', placeholder: 'Descreva o problema do veículo...' %>
+</div>
+
             <div class="mb-3">
               <%= form.label :servico_id, 'Serviço', class: 'form-label' %>
               <%= form.collection_select :servico_id, @servicos, :id, :nome, { prompt: 'Selecione um serviço', class: 'form-select' }, class: 'form-control' %>

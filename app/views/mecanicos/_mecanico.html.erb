@@ -1,25 +1,24 @@
-<div class="table-responsive mt-5 col-6 mx-auto">
-  <table class="table table-bordered">
-    <thead class="thead-dark">
+
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nome</th>
+      <th>Especialidade</th>
+      <th>Equipe</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @mecanicos.each do |mecanico| %>
       <tr>
-        <th colspan="2" class="text-center">Detalhes do Mecânico</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="font-weight-bold">Nome:</td>
         <td><%= mecanico.nome %></td>
-      </tr>
-
-      <tr>
-        <td class="font-weight-bold">Especialidade:</td>
         <td><%= mecanico.especialidade %></td>
-      </tr>
-
-      <tr>
-        <td class="font-weight-bold">Equipe:</td>
         <td><%= mecanico.equipe.nome %></td>
+        <td>
+          <%= link_to "Exibir", mecanico, class: "btn btn-primary" %>
+        </td>
       </tr>
-    </tbody>
-  </table>
-</div>
+    <% end %>
+  </tbody>
+</table>
+

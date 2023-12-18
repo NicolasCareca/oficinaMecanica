@@ -8,6 +8,8 @@ class ServicosController < ApplicationController
 
   # GET /servicos/1 or /servicos/1.json
   def show
+    @servico= Servico.find(params[:id])
+    @servicos = [ @servico]
   end
 
   # GET /servicos/new

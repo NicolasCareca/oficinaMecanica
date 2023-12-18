@@ -1,26 +1,26 @@
-<div id="<%= dom_id peca %>" class="container mt-4">
+<div class="container mt-4">
+
   <div class="table-responsive">
-    <table class="table table-bordered mx-auto col-6">
+    <table class="table table-bordered mx-auto">
       <thead class="thead-dark">
         <tr>
-          <th colspan="2" class="text-center">Detalhes da Peça</th>
+          <th>Nome</th>
+          <th>Quantidade</th>
+          <th>Preço por Peça</th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="font-weight-bold">Nome:</td>
-          <td><%= peca.nome %></td>
-        </tr>
-
-        <tr>
-          <td class="font-weight-bold">Quantidade:</td>
-          <td><%= peca.quantidade %></td>
-        </tr>
-
-        <tr>
-          <td class="font-weight-bold">Preço por peça:</td>
-          <td><%= peca.preco %></td>
-        </tr>
+        <% @pecas.each do |peca| %>
+          <tr>
+            <td><%= peca.nome %></td>
+            <td><%= peca.quantidade %></td>
+            <td><%= peca.preco %></td>
+            <td>
+                <%= link_to "Exibir", peca, class: "btn btn-primary" %>
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>

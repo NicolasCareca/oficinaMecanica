@@ -6,11 +6,6 @@
   <div id="veiculos">
     <% @veiculos.each do |veiculo| %>
       <%= render veiculo %>
-      <p class="mt-2">
-        <%= link_to "exibir", veiculo, class: "btn btn-primary" %>
-      </p>
     <% end %>
   </div>
-
-  <%= link_to "novo veiculo", new_veiculo_path, class: "btn btn-success mt-4" %>
 </div>
