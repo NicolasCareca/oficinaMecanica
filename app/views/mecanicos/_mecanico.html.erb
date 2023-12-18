@@ -1,15 +1,5 @@
 
-<table class="table table-bordered">
-  <thead class="thead-dark">
-    <tr>
-      <th>Nome</th>
-      <th>Especialidade</th>
-      <th>Equipe</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @mecanicos.each do |mecanico| %>
+
       <tr>
         <td><%= mecanico.nome %></td>
         <td><%= mecanico.especialidade %></td>
@@ -18,7 +8,6 @@
           <%= link_to "Exibir", mecanico, class: "btn btn-primary" %>
         </td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+
+  
 

@@ -1,14 +1,4 @@
-<div class="container mt-5">
-  <table class="table table-bordered mx-auto">
-    <thead class="thead-dark">
-      <tr>
-        <th>Nome</th>
-        <th>Descrição</th>
-        <th>Mecânicos</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
+
       <% if @equipes.present? %>
         <% @equipes.each do |equipe| %>
           <tr>
@@ -33,6 +23,4 @@
           <td colspan="4" class="text-center">Nenhuma equipe encontrada.</td>
         </tr>
       <% end %>
-    </tbody>
-  </table>
-</div>
+   

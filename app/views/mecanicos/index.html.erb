@@ -4,10 +4,21 @@
 <div class="text-center mt-3 mb-3">
   <%= link_to "Novo Mecânico", new_mecanico_path, class: "btn btn-success" %>
 </div>
-
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nome</th>
+      <th>Especialidade</th>
+      <th>Equipe</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+   
 <div id="mecanicos" class="text-center">
   <% @mecanicos.each do |mecanico| %>
     <%= render mecanico %>
   <% end %>
 </div>
-
+</tbody>
+</table>

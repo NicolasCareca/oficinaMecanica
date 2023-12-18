@@ -1,17 +1,4 @@
-<div class="container mt-4">
 
-  <div class="table-responsive">
-    <table class="table table-bordered mx-auto">
-      <thead class="thead-dark">
-        <tr>
-          <th>Nome</th>
-          <th>Quantidade</th>
-          <th>Preço por Peça</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @pecas.each do |peca| %>
           <tr>
             <td><%= peca.nome %></td>
             <td><%= peca.quantidade %></td>
@@ -20,8 +7,5 @@
                 <%= link_to "Exibir", peca, class: "btn btn-primary" %>
             </td>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
+
+   

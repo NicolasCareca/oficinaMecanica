@@ -3,6 +3,17 @@
  <div class="text-center mt-3 mb-3">
     <%= link_to "Nova equipe", new_equipe_path, class: "btn btn-primary" %>
   </div>
+  <div class="container mt-5">
+  <table class="table table-bordered mx-auto">
+    <thead class="thead-dark">
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Mecânicos</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
   <div id="equipes">
     <% if @equipes.present? %>
       <% @equipes.each do |equipe| %>
@@ -13,6 +24,9 @@
       <p>No equipes found.</p>
     <% end %>
   </div>
+ </tbody>
+  </table>
+</div>
 
  
 </div>
