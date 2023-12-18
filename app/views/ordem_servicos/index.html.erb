@@ -5,10 +5,7 @@
       <tr>
         <th>Veículo</th>
         <th>Problema</th>
-        <th>Serviço</th>
-        <th>Peça</th>
         <th>Equipe</th>
-        <th>Valor</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -17,10 +14,9 @@
         <tr>
           <td><%= ordem_servico.veiculo.placa %></td>
           <td><%= ordem_servico.problema_veiculo %></td>
-          <td><%= ordem_servico.servico.nome %></td>
-          <td><%= ordem_servico.peca.nome if ordem_servico.peca %></td>
-          <td><%= ordem_servico.equipe.descricao %></td>
-          <td><%= number_to_currency(ordem_servico.valor) %></td>
+       
+          <td><%= ordem_servico.equipe.nome %></td>
+        
           <td>
             <%= link_to 'Ver', ordem_servico, class: 'btn btn-info btn-sm me-1' %>
             <%= link_to 'Editar', edit_ordem_servico_path(ordem_servico), class: 'btn btn-warning btn-sm me-1' %>
