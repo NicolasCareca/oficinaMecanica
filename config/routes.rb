@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :ordem_servicos 
+  resources :ordem_servicos do
+    member do
+      patch 'update_status'
+    end
+  end
+
   resources :equipes
   resources :veiculos
   resources :mecanicos

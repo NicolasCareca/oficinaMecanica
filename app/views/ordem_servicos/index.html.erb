@@ -1,11 +1,13 @@
 <div class="container mt-4">
   <h1 class="mb-4">Ordens de Serviço</h1>
-  <table class="table table-striped table-bordered">
+    <%= link_to 'Nova Ordem de Serviço', new_ordem_servico_path, class: 'btn btn-primary' %>
+  <table class="table table-striped table-bordered-dark">
     <thead class="table-dark">
       <tr>
         <th>Veículo</th>
         <th>Problema</th>
         <th>Equipe</th>
+        <th>Status</th> 
         <th>Ações</th>
       </tr>
     </thead>
@@ -14,19 +16,42 @@
         <tr>
           <td><%= ordem_servico.veiculo.placa %></td>
           <td><%= ordem_servico.problema_veiculo %></td>
-       
           <td><%= ordem_servico.equipe.nome %></td>
-        
+          <td><%= ordem_servico.status %></td> 
           <td>
-            <%= link_to 'Ver', ordem_servico, class: 'btn btn-info btn-sm me-1' %>
-            <%= link_to 'Editar', edit_ordem_servico_path(ordem_servico), class: 'btn btn-warning btn-sm me-1' %>
-          <%= link_to 'Concluir', ordem_servico, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm', remote: true %>
+            <%= link_to ordem_servico, class:"text-decoration-none" do %>
+            <i class="fa-solid fa-eye link-dark "></i>
+         <%end%>
+            <%= link_to  edit_ordem_servico_path(ordem_servico),  class:"text-decoration-none " do%>
+            <i class="fa-solid fa-pen link-dark"></i>
+             <%end%>
+          <i class="fa-solid fa-trash"></i>
+           
 
-
+            <%= form_tag(update_status_ordem_servico_path(ordem_servico), method: :patch, class: 'd-inline') do %>
+              <%= select_tag 'status', options_for_select(['Recebido', 'Em Andamento', 'Concluído'], ordem_servico.status), class: 'form-select form-select-sm d-inline' %>
+              <div class="mt-2">
+              <%= button_tag(type: "submit" ) do %>
+                <i class="fa-solid fa-sync "></i>
+                    <% end %>
+                    </div>
+            <% end %>
+            
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= link_to 'Nova Ordem de Serviço', new_ordem_servico_path, class: 'btn btn-primary' %>
+
 </div>
+<style>
+  /* Adicione este bloco de estilo para personalizar as bordas */
+  .table-bordered-dark tbody tr,
+  .table-bordered-dark thead tr {
+    border-color: #000;
+  }
+  .table-bordered-dark th,
+  .table-bordered-dark td {
+    border: 1px solid #000;
+  }
+</style>

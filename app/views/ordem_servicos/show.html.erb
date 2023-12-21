@@ -2,14 +2,21 @@
   <h1 class="mb-4">Ordem de Serviço</h1>
   <div class="card col-6 mx-auto">
     <div class="card-body">
-      <p class="mb-1"><strong>Veículo:</strong> <%= @ordem_servico.veiculo.placa %></p>
-      <p class="mb-1"><strong>Modelo:</strong> <%= @ordem_servico.veiculo.modelo %></p>
-      <p class="mb-1"><strong>cor:</strong> <%= @ordem_servico.veiculo.cor %></p>
-      <p class="mb-1"><strong>Dono:</strong> <%= @ordem_servico.veiculo.cliente.nome %></p>
-      <p class="mb-1"><strong>Telefone de contato:</strong> <%= @ordem_servico.veiculo.cliente.telefone %></p>
-      <p class="mb-1"><strong>Problema do Veículo:</strong> <%= @ordem_servico.problema_veiculo %></p>
-      <p class="mb-1"><strong>Serviço:</strong> <%= @ordem_servico.servico.nome %></p>
-      <p class="mb-1"><strong>Peça:</strong> <%= @ordem_servico.peca.nome if @ordem_servico.peca %></p>
+     <p class="mb-1"><strong>Veículo:</strong> <%= @ordem_servico.veiculo&.placa %></p>
+  <p class="mb-1"><strong>Modelo:</strong> <%= @ordem_servico.veiculo&.modelo %></p>
+  <p class="mb-1"><strong>Cor:</strong> <%= @ordem_servico.veiculo&.cor %></p>
+  <p class="mb-1"><strong>Dono:</strong> <%= @ordem_servico.veiculo&.cliente&.nome %></p>
+  <p class="mb-1"><strong>Telefone de Contato:</strong> <%= @ordem_servico.veiculo&.cliente&.telefone %></p>
+  <p class="mb-1"><strong>Problema do Veículo:</strong> <%= @ordem_servico.problema_veiculo %></p>
+      <% @ordem_servico.servicos.each do |servico| %>
+  <p class="mb-1"><strong>Serviço:</strong> <%= servico.nome %></p>
+<% end %>
+
+     <% @ordem_servico.pecas.each do |peca| %>
+  <p class="mb-1"><strong>Peça:</strong> <%= peca.nome %></p>
+<% end %>
+
+
       <p class="mb-1"><strong>Equipe:</strong> <%= @ordem_servico.equipe.nome %></p>
       <p class="mb-1"><strong>Valor:</strong> <%= number_to_currency(@ordem_servico.valor) %></p>
       <%= link_to 'Voltar', ordem_servicos_path, class: 'btn btn-secondary mt-3' %>

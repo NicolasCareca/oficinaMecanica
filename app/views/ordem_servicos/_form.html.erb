@@ -8,24 +8,34 @@
               <%= form.label :veiculo_id, 'Veículo', class: 'form-label' %>
               <%= form.collection_select :veiculo_id, @veiculos, :id, :placa, { prompt: 'Selecione um veículo', class: 'form-select' }, class: 'form-control' %>
             </div>
-    <div class="mb-3">
-  <%= form.label :problema_veiculo, 'Problema do Veículo', class: 'form-label' %>
-  <%= form.text_area :problema_veiculo, class: 'form-control', placeholder: 'Descreva o problema do veículo...' %>
-</div>
+            <div class="mb-3">
+              <%= form.label :problema_veiculo, 'Problema do Veículo', class: 'form-label' %>
+              <%= form.text_area :problema_veiculo, class: 'form-control', placeholder: 'Descreva o problema do veículo...' %>
+            </div>
+            <div class="mb-3" id="pecas-container">
+              <div class="peca-fields">
+                <%= form.label "ordem_servico[peca_ids][]", 'Peça', class: 'form-label' %>
+                <%= form.collection_select "ordem_servico[peca_ids][]", @pecas, :id, :nome, { prompt: 'Selecione uma peça', class: 'form-select' }, class: 'form-control', id: 'ordem_servico_peca_id' %>
+                <%= link_to 'Remover', '#', class: 'remove-peca' %>
+              </div>
+            </div>
+            <%= link_to 'Adicionar Peça', '#', id: 'add-peca' %>
 
-            <div class="mb-3">
-              <%= form.label :servico_id, 'Serviço', class: 'form-label' %>
-              <%= form.collection_select :servico_id, @servicos, :id, :nome, { prompt: 'Selecione um serviço', class: 'form-select' }, class: 'form-control' %>
+            <!-- Adição de serviços dinâmicos -->
+            <div class="mb-3" id="servicos-container">
+              <div class="servico-fields">
+                <%= form.label "ordem_servico[servico_ids][]", 'Serviço', class: 'form-label' %>
+                <%= form.collection_select "ordem_servico[servico_ids][]", @servicos, :id, :nome, { prompt: 'Selecione um serviço', class: 'form-select' }, class: 'form-control', id: 'ordem_servico_servico_id' %>
+                <%= link_to 'Remover', '#', class: 'remove-servico' %>
+              </div>
             </div>
-            <div class="mb-3">
-              <%= form.label :peca_id, 'Peça', class: 'form-label' %>
-              <%= form.collection_select :peca_id, @pecas, :id, :nome, { prompt: 'Selecione uma peça', class: 'form-select' }, class: 'form-control', id: 'ordem_servico_peca_id' %>
-            </div>
+            <%= link_to 'Adicionar Serviço', '#', id: 'add-servico' %>
+
             <div class="mb-3">
               <%= form.label :equipe_id, 'Equipe', class: 'form-label' %>
               <%= form.collection_select :equipe_id, @equipes, :id, :nome, { prompt: 'Selecione uma equipe', class: 'form-select' }, class: 'form-control' %>
             </div>
-
+            
             <div class="mb-3 text-center">
               <%= form.submit 'Submit', class: 'btn btn-primary' %>
             </div>
@@ -35,3 +45,44 @@
     </div>
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const pecasContainer = document.getElementById('pecas-container');
+    const servicosContainer = document.getElementById('servicos-container');
+    const addPecaButton = document.getElementById('add-peca');
+    const addServicoButton = document.getElementById('add-servico');
+
+    let pecaCount = 0; // Contador para IDs únicos de peças
+    let servicoCount = 0; // Contador para IDs únicos de serviços
+
+    addPecaButton.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const newPecaFields = document.querySelector('.peca-fields').cloneNode(true);
+      pecaCount++;
+
+      const removePecaLink = newPecaFields.querySelector('.remove-peca');
+      removePecaLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        newPecaFields.remove();
+      });
+
+      pecasContainer.appendChild(newPecaFields);
+    });
+
+    addServicoButton.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const newServicoFields = document.querySelector('.servico-fields').cloneNode(true);
+      servicoCount++;
+
+      const removeServicoLink = newServicoFields.querySelector('.remove-servico');
+      removeServicoLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        newServicoFields.remove();
+      });
+
+      servicosContainer.appendChild(newServicoFields);
+    });
+  });
+</script>

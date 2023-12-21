@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_17_205421) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_21_135659) do
   create_table "clientes", force: :cascade do |t|
     t.integer "codigo"
     t.string "nome"
@@ -52,6 +52,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_205421) do
     t.index ["veiculo_id"], name: "index_ordem_de_servicos_on_veiculo_id"
   end
 
+  create_table "ordem_servico_items", force: :cascade do |t|
+    t.integer "ordem_servico_id", null: false
+    t.bigint "servico_id"
+    t.bigint "peca_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ordem_servico_id"], name: "index_ordem_servico_items_on_ordem_servico_id"
+    t.index ["peca_id"], name: "index_ordem_servico_items_on_peca_id"
+    t.index ["servico_id"], name: "index_ordem_servico_items_on_servico_id"
+  end
+
   create_table "ordem_servicos", force: :cascade do |t|
     t.integer "numero"
     t.date "data_emissao"
@@ -61,11 +72,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_205421) do
     t.datetime "updated_at", null: false
     t.integer "veiculo_id", null: false
     t.integer "servico_id", null: false
-    t.integer "peca_id", null: false
+    t.integer "peca_id"
     t.integer "equipe_id", null: false
     t.text "problema"
-    t.string "status"
     t.text "problema_veiculo"
+    t.string "status"
     t.index ["equipe_id"], name: "index_ordem_servicos_on_equipe_id"
     t.index ["peca_id"], name: "index_ordem_servicos_on_peca_id"
     t.index ["servico_id"], name: "index_ordem_servicos_on_servico_id"
@@ -127,6 +138,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_205421) do
   add_foreign_key "ordem_de_servicos", "pecas"
   add_foreign_key "ordem_de_servicos", "servicos"
   add_foreign_key "ordem_de_servicos", "veiculos"
+  add_foreign_key "ordem_servico_items", "ordem_servicos"
+  add_foreign_key "ordem_servico_items", "pecas"
+  add_foreign_key "ordem_servico_items", "servicos"
   add_foreign_key "ordem_servicos", "equipes"
   add_foreign_key "ordem_servicos", "pecas"
   add_foreign_key "ordem_servicos", "servicos"
