@@ -1,0 +1,38 @@
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-6">
+      <strong>Modelo:</strong>
+      <p><%= veiculo.modelo %></p>
+    </div>
+    <div class="col-md-6">
+      <strong>Ano:</strong>
+      <p><%= veiculo.ano %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <strong>placa:</strong>
+      <p><%= veiculo.placa %></p>
+    </div>
+    <div class="col-md-6">
+      <strong>Cor:</strong>
+    <p ><%= veiculo.cor %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+     <strong>Cliente:</strong>
+    <p><%= veiculo.cliente.nome if veiculo.cliente %></p>
+    </div>
+    <div class="col-md-6">
+      <strong>Ações:</strong>
+      <div class="d-flex mt-2">
+     
+        <%= link_to "Editar",  edit_veiculo_path(veiculo),  class: "btn btn-primary mr-3" %>
+        
+        <%= button_to "Deletar", veiculo, method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger ml-3" %>
+     
+       </div>
+    </div>
+  </div>
+</div>

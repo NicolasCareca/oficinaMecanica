@@ -1,11 +1,23 @@
 
-   
-        <tr>
-          <td><%= servico.nome %></td>
-          <td><%= servico.valor %></td>
-          <td>
-            <%= link_to "Exibir", servico_path(servico), class: "btn btn-primary" %>
-          </td>
-        </tr>
+   <!-- /*_servico.html.erb*/ -->
+<tr>
+  <%= render 'servico_info', servico: servico %>
+  <td >
+    <%= link_to servico, class:"text-decoration-none"  do%>
+    <i class="fa-solid fa-eye link-dark "></i>
+       <%end%>
+
+    <%= link_to  edit_servico_path(servico), class:"text-decoration-none"  do %>
+    <i class="fa-solid fa-pen link-dark"></i>
+             <%end%>
   
+  </td>
+</tr>
+
+       
+       
+       
+       
+       
+      
  

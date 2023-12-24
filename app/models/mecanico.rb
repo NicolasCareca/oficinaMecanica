@@ -1,5 +1,6 @@
 class Mecanico < ApplicationRecord
   belongs_to :equipe
-  attribute :funcao
   validates :especialidade, presence: true
+  validates :telefone, presence: true
+  validates :email, presence: true
 end

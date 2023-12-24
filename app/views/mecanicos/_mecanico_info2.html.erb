@@ -1,0 +1,38 @@
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-6">
+      <strong>Nome:</strong>
+      <p><%= mecanico.nome %></p>
+    </div>
+    <div class="col-md-6">
+      <strong>Especialidade:</strong>
+      <p><%= mecanico.especialidade %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <strong>Telefone:</strong>
+      <p><%= mecanico.telefone %></p>
+    </div>
+    <div class="col-md-6">
+      <strong>Email:</strong>
+    <p ><%= mecanico.email %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+     <strong>Equipe:</strong>
+    <p><%= mecanico.equipe.nome if mecanico.equipe %></p>
+    </div>
+    <div class="col-md-6">
+      <strong>Ações:</strong>
+      <div class="d-flex mt-2">
+     
+        <%= link_to "Editar",  edit_mecanico_path(mecanico),  class: "btn btn-primary mr-3" %>
+        
+        <%= button_to "Deletar", mecanico, method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger ml-3" %>
+     
+       </div>
+    </div>
+  </div>
+</div>

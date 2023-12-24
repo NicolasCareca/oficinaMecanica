@@ -1,0 +1,34 @@
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-6">
+      <strong>Nome:</strong>
+      <p><%= peca.nome %></p>
+    </div>
+    <div class="col-md-6">
+      <strong>descricao:</strong>
+      <p><%= peca.descricao %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <strong>Quantidade:</strong>
+      <p><%= peca.quantidade %></p>
+    </div>
+    <div class="col-md-6">
+      <strong>Preço:</strong>
+    <p ><%= peca.preco %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <strong>Ações:</strong>
+      <div class="d-flex mt-2">
+     
+        <%= link_to "Editar",  edit_peca_path(peca),  class: "btn btn-primary mr-3" %>
+        
+        <%= button_to "Deletar", peca, method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger ml-3" %>
+     
+       </div>
+    </div>
+  </div>
+</div>

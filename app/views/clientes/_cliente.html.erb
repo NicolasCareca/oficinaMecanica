@@ -1,11 +1,14 @@
+<!-- /*_cliente.html.erb*/ -->
+<tr>
+  <%= render 'cliente_info', cliente: cliente %>
+  <td >
+    <%= link_to cliente, class:"text-decoration-none"  do%>
+    <i class="fa-solid fa-eye link-dark "></i>
+       <%end%>
 
-          <tr>
-            <td><%= cliente.nome %></td>
-            <td><%= cliente.telefone %></td>
-            <td><%= cliente.cpf %></td>
-            <td><%= cliente.rg %></td>
-            <td class="text-center">
-              <%= link_to "Exibir", cliente, class: "btn btn-primary" %>
-            </td>
-          </tr>
-       
+    <%= link_to  edit_cliente_path(cliente), class:"text-decoration-none"  do %>
+    <i class="fa-solid fa-pen link-dark"></i>
+             <%end%>
+   
+  </td>
+</tr>

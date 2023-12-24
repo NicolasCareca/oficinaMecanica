@@ -1,13 +1,18 @@
+<tr>
+  <%= render 'mecanico_info', mecanico: mecanico %>
+  <td >
+    <%= link_to mecanico, class:"text-decoration-none"  do%>
+    <i class="fa-solid fa-eye link-dark "></i>
+       <%end%>
 
+    <%= link_to  edit_mecanico_path(mecanico), class:"text-decoration-none"  do %>
+    <i class="fa-solid fa-pen link-dark"></i>
+             <%end%>
+   
+  </td>
+</tr>
 
-      <tr>
-        <td><%= mecanico.nome %></td>
-        <td><%= mecanico.especialidade %></td>
-        <td><%= mecanico.equipe.nome %></td>
-        <td>
-          <%= link_to "Exibir", mecanico, class: "btn btn-primary" %>
-        </td>
-      </tr>
-
+       
+      
   
 

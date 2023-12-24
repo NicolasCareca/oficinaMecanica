@@ -1,18 +1,14 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="alert alert-success" role="alert">
-        <%= notice %>
-      </div>
+<!-- show.html.erb -->
+<div class="container mt-4">
+  <div class="mt-3">
+    <%= link_to "Voltar", veiculos_path, class: "btn btn-danger" %>
+  </div>
 
-      <%= render @veiculo %>
-
-      <div class="mt-3 text-center">
-        <%= link_to "editar", edit_veiculo_path(@veiculo), class: "btn btn-primary" %> |
-        <%= link_to "voltar", veiculos_path, class: "btn btn-secondary" %>
-
-        <%= button_to "deletar", @veiculo, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-      </div>
+  <div class="card mt-3">
+    <div class="card-header bg-primary text-white">
+      Informações do Veiculo
+    </div>
+    <div class="card-body">
+      <%= render 'veiculo_info2', veiculo: @veiculo %>
     </div>
   </div>
-</div>

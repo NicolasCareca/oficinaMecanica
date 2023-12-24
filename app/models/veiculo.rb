@@ -5,4 +5,5 @@ class Veiculo < ApplicationRecord
   validates :placa, presence: true
   validates :cor, presence: true
   validates :cliente_id, presence: true
+  validates :ano, presence: true
 end

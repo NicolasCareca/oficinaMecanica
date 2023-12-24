@@ -1,26 +1,24 @@
+<tr>
+  <%= render 'equipe_info', equipe: equipe %>
+  <td >
+    <%= link_to equipe, class:"text-decoration-none"  do%>
+    <i class="fa-solid fa-eye link-dark "></i>
+       <%end%>
 
-      <% if @equipes.present? %>
-        <% @equipes.each do |equipe| %>
-          <tr>
-            <td><%= equipe.nome %></td>
-            <td><%= equipe.descricao %></td>
-            <td>
-              <% if equipe.mecanicos.present? %>
-                <% equipe.mecanicos.each do |mecanico| %>
-                  <%= mecanico.nome %><br>
-                <% end %>
-              <% else %>
-                Nenhum mecânico encontrado
-              <% end %>
-            </td>
-            <td>
-              <%= link_to "Exibir", equipe, class: "btn btn-secondary" %>
-            </td>
-          </tr>
-        <% end %>
-      <% else %>
-        <tr>
-          <td colspan="4" class="text-center">Nenhuma equipe encontrada.</td>
-        </tr>
-      <% end %>
+    <%= link_to  edit_equipe_path(equipe), class:"text-decoration-none"  do %>
+    <i class="fa-solid fa-pen link-dark"></i>
+             <%end%>
    
+  </td>
+</tr>
+
+       
+   
+
+
+
+
+
+
+
+

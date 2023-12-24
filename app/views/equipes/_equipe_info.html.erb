@@ -1,0 +1,8 @@
+<td><%= equipe.nome %></td>
+<td class="d-none d-sm-table-cell"><%= equipe.descricao %></td>
+<td><% if equipe.mecanicos.present? %>
+    <%= equipe.mecanicos.map(&:nome).join(', ') %>
+  <% else %>
+    Nenhum mecânico encontrado
+  <% end %>
+</td>

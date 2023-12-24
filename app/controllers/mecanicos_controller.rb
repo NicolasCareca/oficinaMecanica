@@ -65,12 +65,6 @@ class MecanicosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def mecanico_params
-      params.require(:mecanico).permit(:nome, :funcao, :especialidade, :equipe_id)
+      params.require(:mecanico).permit(:nome, :especialidade, :telefone, :email, :equipe_id)
     end
-end
-
-class Mecanico < ApplicationRecord
-  belongs_to :equipe
-  attribute :funcao
-  validates :especialidade, presence: true
 end

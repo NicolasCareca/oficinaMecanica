@@ -1,14 +1,14 @@
-<!-- /*_form.html.erb*/ -->
+<!-- _form.html.erb -->
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
+    <%= link_to "Voltar", clientes_path, class: "btn btn-danger mb-3" %>
       <div class="card">
         <div class="card-body">
           <%= form_with(model: cliente, class: "form-horizontal mx-auto") do |form| %>
             <% if cliente.errors.any? %>
               <div class="alert alert-danger">
                 <h2><%= pluralize(cliente.errors.count, "error") %> prohibited this cliente from being saved:</h2>
-
                 <ul>
                   <% cliente.errors.full_messages.each do |message| %>
                     <li><%= message %></li>
@@ -32,9 +32,9 @@
             </div>
 
             <div class="form-group">
-              <%= form.label :cpf, class: "control-label" %>
+              <%= form.label :email, class: "control-label" %>
               <div class="col-sm-12">
-                <%= form.text_field :cpf, class: "form-control" %>
+                <%= form.text_field :email, class: "form-control" %>
               </div>
             </div>
 
@@ -45,9 +45,16 @@
               </div>
             </div>
 
-            <div class="form-group mt-3 text-center"> 
-              <%= form.submit class: "btn btn-primary col-6" %>
+            <div class="form-group">
+              <%= form.label :cpf, class: "control-label" %>
+              <div class="col-sm-12">
+                <%= form.text_field :cpf, class: "form-control" %>
+              </div>
             </div>
+
+            <div class="form-group mt-3 text-center"> 
+  <%= form.submit "Adicionar", class: "btn btn-primary col-sm-12", style: "height: 8vh;" %>
+</div>
           <% end %>
         </div>
       </div>

@@ -1,12 +1,14 @@
-<p style="color: green"><%= notice %></p>
-
-<div class="text-center">
-  <%= render @servico %>
-
-  <div>
-    <%= link_to "editar", edit_servico_path(@servico), class: "btn btn-primary" %> |
-    <%= link_to "voltar", servicos_path, class: "btn btn-secondary" %>
-
-    <%= button_to "excluir", @servico, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+<!-- /*_show.html.erb*/ -->
+<div class="container mt-4">
+  <div class="mt-3">
+    <%= link_to "Voltar", servicos_path, class: "btn btn-danger" %>
   </div>
-</div>
+
+  <div class="card mt-3">
+    <div class="card-header bg-primary text-white">
+      Informações do Serviço
+    </div>
+    <div class="card-body">
+      <%= render 'servico_info2', servico: @servico %>
+    </div>
+  </div>

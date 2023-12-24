@@ -1,11 +1,26 @@
+<!-- /*_cliente.html.erb*/ -->
+<tr>
+  <%= render 'peca_info', peca: peca %>
+  <td >
+    <%= link_to peca, class:"text-decoration-none"  do%>
+    <i class="fa-solid fa-eye link-dark "></i>
+       <%end%>
 
-          <tr>
-            <td><%= peca.nome %></td>
-            <td><%= peca.quantidade %></td>
-            <td><%= peca.preco %></td>
-            <td>
-                <%= link_to "Exibir", peca, class: "btn btn-primary" %>
-            </td>
-          </tr>
-
+    <%= link_to  edit_peca_path(peca), class:"text-decoration-none"  do %>
+    <i class="fa-solid fa-pen link-dark"></i>
+             <%end%>
+   
+  </td>
+</tr>
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
    

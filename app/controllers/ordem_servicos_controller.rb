@@ -104,6 +104,6 @@
         valor_total += servico.valor.to_f
       end
 
-      ordem_servico.update(valor: valor_total)  
+      ordem_servico.update(valor: valor_total)
     end
   end

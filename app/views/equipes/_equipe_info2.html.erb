@@ -1,0 +1,35 @@
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-6">
+      <strong>Nome:</strong>
+      <p><%= equipe.nome %></p>
+    </div>
+    <div class="col-md-6">
+      <strong>Descrição:</strong>
+      <p><%= equipe.descricao %></p>
+    </div>
+  </div>
+ 
+  <div class="row">
+    <div class="col-md-6">
+  <strong>Mecânicos:</strong>
+  <% if equipe.mecanicos.present? %>
+    <% mechanic_names = equipe.mecanicos.map(&:nome).join(', ') %>
+    <p><%= mechanic_names %></p>
+  <% else %>
+    <p>Nenhum mecânico encontrado</p>
+  <% end %>
+</div>
+
+    <div class="col-md-6">
+      <strong>Ações:</strong>
+      <div class="d-flex mt-2">
+     
+        <%= link_to "Editar",  edit_equipe_path(equipe),  class: "btn btn-primary mr-3" %>
+        
+        <%= button_to "Deletar", equipe, method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger ml-3" %>
+     
+       </div>
+    </div>
+  </div>
+</div>

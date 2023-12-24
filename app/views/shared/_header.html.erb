@@ -1,12 +1,13 @@
+
 <header>
-    <!-- Your header content goes here -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
       <a class="navbar-brand" href="#">Oficina</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto"> <!-- Use ml-auto to move the nav to the right -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
           <li class="nav-item">
             <%= link_to "Clientes", clientes_path, class: "nav-link" %>
           </li>
@@ -26,7 +27,6 @@
             <%= link_to "Equipes", equipes_path, class: "nav-link" %>
           </li>
 
-          <!-- New link for Ordens de Serviço -->
           <li class="nav-item">
             <%= link_to "OS", ordem_servicos_path, class: "nav-link" %>
           </li>
@@ -42,5 +42,11 @@
           <% end %>
         </ul>
       </div>
-    </nav>
-  </header>
+    </div>
+  </nav>
+</header>
+
+<!-- Bootstrap JS e dependências (Popper.js e jQuery) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>

@@ -1,10 +1,5 @@
- <div class="container mt-5"> 
- <div class="mx-auto text-center">
-    <h1>Nova Equipe</h1>
-  </div>
-    <%= render "form", equipe: @equipe, class: "mt-3 mb-3" %> 
+<div class="container mt-4 ">
+<h1 class="text-center">Nova Equipe</h1>
 
-    <div class="text-center mb-3"> 
-      <%= link_to "Voltar", equipes_path, class: "btn btn-secondary mt-3" %>
-    </div>
-  </div>
+<%= render "form", equipe: @equipe %>
+</div>

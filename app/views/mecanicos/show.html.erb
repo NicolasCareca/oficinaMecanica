@@ -1,14 +1,14 @@
-<div class="container">
-  <div class="text-center">
-    <p class="text-success"><%= notice %></p>
+<!-- show.html.erb -->
+<div class="container mt-4">
+  <div class="mt-3">
+    <%= link_to "Voltar", mecanicos_path, class: "btn btn-danger" %>
+  </div>
 
-    <%= render @mecanico %>
-
-    <div class="mt-3">
-      <%= link_to "editar", edit_mecanico_path(@mecanico), class: "btn btn-primary" %> |
-      <%= link_to "voltar ", mecanicos_path, class: "btn btn-secondary" %>
-
-      <%= button_to "deletar", @mecanico, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger mt-3" %>
+  <div class="card mt-3">
+    <div class="card-header bg-primary text-white">
+      Informações do mecanico
+    </div>
+    <div class="card-body">
+      <%= render 'mecanico_info2', mecanico: @mecanico %>
     </div>
   </div>
-</div>

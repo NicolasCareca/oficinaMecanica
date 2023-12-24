@@ -10,14 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_21_135659) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_23_232514) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "clientes", force: :cascade do |t|
-    t.integer "codigo"
     t.string "nome"
-    t.string "endereco"
     t.string "telefone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cpf"
+    t.string "rg"
+    t.string "email"
   end
 
   create_table "equipes", force: :cascade do |t|
@@ -27,13 +31,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_135659) do
   end
 
   create_table "mecanicos", force: :cascade do |t|
-    t.integer "codigo"
     t.string "nome"
-    t.string "endereco"
     t.string "especialidade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "equipe_id", null: false
+    t.string "telefone"
+    t.string "email"
     t.index ["equipe_id"], name: "index_mecanicos_on_equipe_id"
   end
 
@@ -122,14 +126,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_135659) do
   end
 
   create_table "veiculos", force: :cascade do |t|
-    t.integer "codigo"
     t.string "placa"
-    t.string "descricao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "modelo"
     t.string "cor"
     t.integer "cliente_id"
+    t.integer "ano"
   end
 
   add_foreign_key "mecanicos", "equipes"

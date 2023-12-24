@@ -1,42 +1,48 @@
-<div id="<%= dom_id peca %>" class="container mt-4">
-  <div class="card mx-auto col-6">
+<div class="container mt-4">
+  <div class=" col-8 mx-auto">
+    <%= link_to "Voltar", pecas_path, class: "btn btn-danger mb-3" %>
+  <div class="card ">
+  
     <div class="card-body">
-      <h5 class="card-title">Informações da Peça</h5>
-
-      <%= form_with(model: peca, local: true) do |form| %>
-
+      <%= form_with(model: peca, class: "form") do |form| %>
+        <!-- Se houver erros, exiba uma mensagem -->
         <% if peca.errors.any? %>
           <div class="alert alert-danger">
-            <h6><%= pluralize(peca.errors.count, "error") %> proibiu esta peça de ser salva:</h6>
+            <h2><%= pluralize(peca.errors.count, "error") %> prohibited this peca from being saved:</h2>
             <ul>
-              <% peca.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
+              <% peca.errors.each do |error| %>
+                <li><%= error.full_message %></li>
               <% end %>
             </ul>
           </div>
         <% end %>
 
-        <div class="mb-3">
-          <%= form.label :nome, class: "form-label" %>
+        <!-- Campos do formulário -->
+        <div class="form-group">
+          <%= form.label :nome %>
           <%= form.text_field :nome, class: "form-control" %>
         </div>
+<div class="form-group">
+          <%= form.label :descricao %>
+          <%= form.text_field :descricao, class: "form-control" %>
+        </div>
 
-        <div class="mb-3">
-          <%= form.label :quantidade, class: "form-label" %>
+        <div class="form-group">
+          <%= form.label :quantidade %>
           <%= form.number_field :quantidade, class: "form-control" %>
         </div>
 
-        <div class="mb-3">
-          <%= form.label :preco, class: "form-label" %>
+        <div class="form-group">
+          <%= form.label :preco %>
           <%= form.number_field :preco, class: "form-control" %>
         </div>
 
-        <div class="text-center">
-          <%= form.submit "Salvar", class: "btn btn-primary" %>
+  
+         <div class="form-group mt-3 text-center"> 
+          <%= form.submit "Adicionar" , class: "btn btn-primary col-sm-12", style: "height: 8vh;" %>
         </div>
-
       <% end %>
-
     </div>
   </div>
+</div>
 </div>
