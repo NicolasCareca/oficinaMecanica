@@ -1,51 +1,66 @@
-<%= form_with(model: @ordem_servico, url: @ordem_servico.persisted? ? ordem_servico_path(@ordem_servico) : ordem_servicos_path, method: @ordem_servico.persisted? ? :patch : :post) do |form| %>
+<div class="container mt-4">
+  <%= link_to 'Voltar', ordem_servicos_path, class: "btn btn-danger mt-3 mb-3" %>
 
-  <div class="field">
-    <%= form.label :veiculo_id, 'Veículo' %>
-    <%= form.collection_select :veiculo_id, Veiculo.all, :id, :placa, { selected: @ordem_servico.veiculo_id }, { readonly: true, class: 'form-control' } %>
-  </div>
+  <div class="card ">
+    <div class="card-body">
+      <%= form_with(model: @ordem_servico, url: @ordem_servico.persisted? ? ordem_servico_path(@ordem_servico) : ordem_servicos_path, method: @ordem_servico.persisted? ? :patch : :post, html: { class: 'needs-validation', novalidate: true }) do |form| %>
 
-  <div class="field">
-    <%= form.label :equipe_id, 'Equipe' %>
-    <%= form.collection_select :equipe_id, Equipe.all, :id, :nome, { selected: @ordem_servico.equipe_id }, { readonly: true, class: 'form-control' } %>
-  </div>
+        <div class="mb-3">
+          <%= form.label :veiculo_id, 'Veículo', class: 'form-label' %>
+          <%= form.collection_select :veiculo_id, Veiculo.all, :id, :placa, { selected: @ordem_servico.veiculo_id }, { readonly: true, class: 'form-control' } %>
+        </div>
 
-  <div class="field">
-    <%= form.label :problema, 'Problema' %>
-    <%= form.text_area :problema, class: 'form-control' %>
+        <div class="mb-3">
+          <%= form.label :equipe_id, 'Equipe', class: 'form-label' %>
+          <%= form.collection_select :equipe_id, Equipe.all, :id, :nome, { selected: @ordem_servico.equipe_id }, { readonly: true, class: 'form-control' } %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :problema, 'Problema', class: 'form-label' %>
+          <%= form.text_area :problema, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :status, 'Status', class: 'form-label' %>
+          <%= form.select :status, ['Recebido', 'Andamento', 'Concluído'], { prompt: 'Selecione o status' }, { class: 'form-control' } %>
+        </div>
+
+        <% if @exibir_campos_servico_e_peca && @ordem_servico.persisted? %>
+          <%= form.fields_for :ordem_servico_servicos do |service_fields| %>
+            <div class="mb-3">
+              <%= service_fields.label :servico_id, 'Serviço', class: 'form-label' %>
+              <%= service_fields.collection_select :servico_id, Servico.all, :id, :nome, { prompt: 'Selecione um serviço' }, { class: 'form-control' } %>
+            </div>
+          <% end %>
+
+          <%= form.fields_for :ordem_servico_pecas do |part_fields| %>
+            <div class="mb-3">
+              <%= part_fields.label :peca_id, 'Peça', class: 'form-label' %>
+              <%= part_fields.collection_select :peca_id, Peca.all, :id, :nome, { prompt: 'Selecione uma peça' }, { class: 'form-control' } %>
+            </div>
+
+            <div class="mb-3">
+              <%= part_fields.label :quantidade, 'Quantidade', class: 'form-label' %>
+              <%= part_fields.number_field :quantidade, class: 'form-control' %>
+            </div>
+          <% end %>
+        <% else %>
+          <%= form.fields_for :ordem_servico_servicos do |service_fields| %>
+            <%= service_fields.hidden_field :servico_id %>
+          <% end %>
+
+          <%= form.fields_for :ordem_servico_pecas do |part_fields| %>
+            <%= part_fields.hidden_field :peca_id %>
+            <%= part_fields.hidden_field :quantidade %>
+          <% end %>
+        <% end %>
+
+        <%= form.hidden_field :valor_total %>
+
+        <div class="mb-3 text-center">
+          <%= form.submit 'Cadastrar', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<div class="field">
-  <%= form.label :status, 'Status' %>
-  <%= form.select :status, ['Recebido', 'Andamento', 'Concluído'], { prompt: 'Selecione o status' }, { class: 'form-control' } %>
 </div>
-
-  <% @ordem_servico.ordem_servico_servicos.each do |service| %>
-    <%= form.fields_for :ordem_servico_servicos, service do |service_fields| %>
-      <div class="field">
-        <%= service_fields.label :servico_id, 'Serviço' %>
-        <%= service_fields.collection_select :servico_id, Servico.all, :id, :nome, { prompt: 'Selecione um serviço' }, { class: 'form-control' } %>
-      </div>
-    <% end %>
-  <% end %>
-
-  <% @ordem_servico.ordem_servico_pecas.each do |part| %>
-    <%= form.fields_for :ordem_servico_pecas, part do |part_fields| %>
-      <div class="field">
-        <%= part_fields.label :peca_id, 'Peça' %>
-        <%= part_fields.collection_select :peca_id, Peca.all, :id, :nome, { prompt: 'Selecione uma peça' }, { class: 'form-control' } %>
-      </div>
-
-      <div class="field">
-        <%= part_fields.label :quantidade, 'Quantidade' %>
-        <%= part_fields.number_field :quantidade, class: 'form-control' %>
-      </div>
-    <% end %>
-
-
-<% end %>
-
-
-  <div class="actions">
-    <%= form.submit 'Cadastrar' %>
-  </div>
-<% end %>

@@ -1,9 +1,7 @@
-
-# app/models/ordem_servico.rb
 class OrdemServico < ApplicationRecord
   belongs_to :veiculo
   belongs_to :equipe
-  
+
   has_many :ordem_servico_servicos, dependent: :destroy
   has_many :ordem_servico_pecas, dependent: :destroy
 
@@ -16,23 +14,24 @@ class OrdemServico < ApplicationRecord
   validates :problema, presence: true
   validates :status, presence: false
 
-  before_save :calcular_valor_total
+
+
   def calcular_valor_total
     total_servicos = servicos.sum(:valor)
-    total_pecas = pecas.sum { |peca| peca.preco * quantidade_da_peca(peca) }
+    total_pecas = 0
 
-    puts "Debug: total_servicos=#{total_servicos}, total_pecas=#{total_pecas}"
+    pecas.each do |peca|
+      quantidade = quantidade_da_peca(peca)
+      total_pecas += peca.preco * quantidade if quantidade.positive?
+    end
 
     self.valor_total = total_servicos + total_pecas
-    puts "Debug: valor_total=#{self.valor_total}"
   end
 
-
-  private
-
   def quantidade_da_peca(peca)
-    # Obtém a quantidade da peça associada à ordem de serviço
     ordem_servico_peca = ordem_servico_pecas.find_by(peca_id: peca.id)
     ordem_servico_peca&.quantidade.to_i
   end
+  before_save :calcular_valor_total, if: -> { !valor_total_changed? }
+  attr_accessor :valor_total_changed
 end

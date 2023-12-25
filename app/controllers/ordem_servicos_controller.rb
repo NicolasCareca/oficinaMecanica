@@ -11,19 +11,18 @@ class OrdemServicosController < ApplicationController
   end
 
   def new
+    @exibir_campos_servico_e_peca = false
     @ordem_servico = OrdemServico.new
     @servicos = Servico.all
     @pecas = Peca.all
     @veiculos = Veiculo.all
     @equipes = Equipe.all
-    @ordem_servico.ordem_servico_servicos.build
-    @ordem_servico.ordem_servico_pecas.build
+
   end
+
 
   def create
     @ordem_servico = OrdemServico.new(ordem_servico_params)
-
-    puts "Debug: ordem_servico_params=#{ordem_servico_params}"
 
     if @ordem_servico.save
       redirect_to ordem_servicos_path, notice: 'Ordem de Serviço criada com sucesso.'
@@ -35,9 +34,13 @@ class OrdemServicosController < ApplicationController
     end
   end
 
+
   def edit
+    @exibir_campos_servico_e_peca = true
     @servicos = Servico.all
     @equipes = Equipe.all
+    @ordem_servico.ordem_servico_servicos.build
+    @ordem_servico.ordem_servico_pecas.build
   end
 
   def update
@@ -74,7 +77,8 @@ class OrdemServicosController < ApplicationController
       :veiculo_id,
       :equipe_id,
       :problema,
-      :status,  # Add this line
+      :status,
+      :valor_total,
       ordem_servico_servicos_attributes: [:id, :servico_id, :_destroy],
       ordem_servico_pecas_attributes: [:id, :peca_id, :quantidade, :_destroy]
     )
