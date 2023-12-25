@@ -1,14 +1,24 @@
 <!-- show.html.erb -->
 <div class="container mt-4">
-  <div class="mt-3">
+  <div class="mb-3">
     <%= link_to "Voltar", veiculos_path, class: "btn btn-danger" %>
   </div>
 
-  <div class="card mt-3">
+  <div class="card mb-3">
     <div class="card-header bg-primary text-white">
-      Informações do Veiculo
+      Informações do Veículo
     </div>
     <div class="card-body">
       <%= render 'veiculo_info2', veiculo: @veiculo %>
     </div>
   </div>
+
+  <div class="card">
+    <div class="card-header bg-danger text-white">
+      Informações do Cliente
+    </div>
+    <div class="card-body">
+      <%= render 'clientes/cliente_info2', cliente: @cliente %>
+    </div>
+  </div>
+</div>

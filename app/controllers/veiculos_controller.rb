@@ -10,7 +10,8 @@ class VeiculosController < ApplicationController
   # GET /veiculos/1 or /veiculos/1.json
   def show
     @veiculo = Veiculo.find(params[:id])
-    @veiculos = [ @veiculo]
+    @veiculos = [@veiculo]
+    @cliente = @veiculo.cliente
   end
 
   # GET /veiculos/new
