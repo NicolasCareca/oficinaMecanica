@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_23_232514) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_24_040220) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,59 +41,35 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_23_232514) do
     t.index ["equipe_id"], name: "index_mecanicos_on_equipe_id"
   end
 
-  create_table "ordem_de_servicos", force: :cascade do |t|
-    t.integer "veiculo_id", null: false
-    t.integer "servico_id", null: false
-    t.integer "equipe_id", null: false
-    t.integer "mecanico_id", null: false
-    t.integer "peca_id", null: false
+  create_table "ordem_servico_pecas", force: :cascade do |t|
+    t.bigint "ordem_servico_id", null: false
+    t.bigint "peca_id", null: false
+    t.integer "quantidade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["equipe_id"], name: "index_ordem_de_servicos_on_equipe_id"
-    t.index ["mecanico_id"], name: "index_ordem_de_servicos_on_mecanico_id"
-    t.index ["peca_id"], name: "index_ordem_de_servicos_on_peca_id"
-    t.index ["servico_id"], name: "index_ordem_de_servicos_on_servico_id"
-    t.index ["veiculo_id"], name: "index_ordem_de_servicos_on_veiculo_id"
+    t.index ["ordem_servico_id"], name: "index_ordem_servico_pecas_on_ordem_servico_id"
+    t.index ["peca_id"], name: "index_ordem_servico_pecas_on_peca_id"
   end
 
-  create_table "ordem_servico_items", force: :cascade do |t|
-    t.integer "ordem_servico_id", null: false
-    t.bigint "servico_id"
-    t.bigint "peca_id"
+  create_table "ordem_servico_servicos", force: :cascade do |t|
+    t.bigint "ordem_servico_id", null: false
+    t.bigint "servico_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ordem_servico_id"], name: "index_ordem_servico_items_on_ordem_servico_id"
-    t.index ["peca_id"], name: "index_ordem_servico_items_on_peca_id"
-    t.index ["servico_id"], name: "index_ordem_servico_items_on_servico_id"
+    t.index ["ordem_servico_id"], name: "index_ordem_servico_servicos_on_ordem_servico_id"
+    t.index ["servico_id"], name: "index_ordem_servico_servicos_on_servico_id"
   end
 
   create_table "ordem_servicos", force: :cascade do |t|
-    t.integer "numero"
-    t.date "data_emissao"
-    t.decimal "valor"
-    t.date "data_conclusao"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "veiculo_id", null: false
-    t.integer "servico_id", null: false
-    t.integer "peca_id"
-    t.integer "equipe_id", null: false
+    t.bigint "veiculo_id", null: false
+    t.bigint "equipe_id", null: false
     t.text "problema"
-    t.text "problema_veiculo"
     t.string "status"
-    t.index ["equipe_id"], name: "index_ordem_servicos_on_equipe_id"
-    t.index ["peca_id"], name: "index_ordem_servicos_on_peca_id"
-    t.index ["servico_id"], name: "index_ordem_servicos_on_servico_id"
-    t.index ["veiculo_id"], name: "index_ordem_servicos_on_veiculo_id"
-  end
-
-  create_table "ordem_servicos_pecas", force: :cascade do |t|
-    t.integer "ordem_servico_id", null: false
-    t.integer "peca_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ordem_servico_id"], name: "index_ordem_servicos_pecas_on_ordem_servico_id"
-    t.index ["peca_id"], name: "index_ordem_servicos_pecas_on_peca_id"
+    t.decimal "valor_total"
+    t.index ["equipe_id"], name: "index_ordem_servicos_on_equipe_id"
+    t.index ["veiculo_id"], name: "index_ordem_servicos_on_veiculo_id"
   end
 
   create_table "pecas", force: :cascade do |t|
@@ -136,18 +112,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_23_232514) do
   end
 
   add_foreign_key "mecanicos", "equipes"
-  add_foreign_key "ordem_de_servicos", "equipes"
-  add_foreign_key "ordem_de_servicos", "mecanicos"
-  add_foreign_key "ordem_de_servicos", "pecas"
-  add_foreign_key "ordem_de_servicos", "servicos"
-  add_foreign_key "ordem_de_servicos", "veiculos"
-  add_foreign_key "ordem_servico_items", "ordem_servicos"
-  add_foreign_key "ordem_servico_items", "pecas"
-  add_foreign_key "ordem_servico_items", "servicos"
+  add_foreign_key "ordem_servico_pecas", "ordem_servicos"
+  add_foreign_key "ordem_servico_pecas", "pecas"
+  add_foreign_key "ordem_servico_servicos", "ordem_servicos"
+  add_foreign_key "ordem_servico_servicos", "servicos"
   add_foreign_key "ordem_servicos", "equipes"
-  add_foreign_key "ordem_servicos", "pecas"
-  add_foreign_key "ordem_servicos", "servicos"
   add_foreign_key "ordem_servicos", "veiculos"
-  add_foreign_key "ordem_servicos_pecas", "ordem_servicos"
-  add_foreign_key "ordem_servicos_pecas", "pecas"
 end

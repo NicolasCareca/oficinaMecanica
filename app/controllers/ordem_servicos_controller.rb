@@ -1,109 +1,82 @@
-  # app/controllers/ordem_servicos_controller.rb
-  class OrdemServicosController < ApplicationController
-    before_action :set_ordem_servico, only: [:show, :edit, :update, :destroy]
-    before_action :load_associated_data, only: [:new, :edit]
+# app/controllers/ordem_servicos_controller.rb
+class OrdemServicosController < ApplicationController
+  before_action :set_ordem_servico, only: [:show, :edit, :update, :destroy, :concluir]
 
-    def index
-      @ordem_servicos = OrdemServico.all
-    end
+  def index
+    @ordem_servicos = OrdemServico.all
+  end
 
-    def show
-    end
+  def show
+    # Adicione aqui qualquer lógica adicional necessária para exibir uma ordem de serviço
+  end
 
-    def new
-      @ordem_servico = OrdemServico.new
-    end
+  def new
+    @ordem_servico = OrdemServico.new
+    @servicos = Servico.all
+    @pecas = Peca.all
+    @veiculos = Veiculo.all
+    @equipes = Equipe.all
+    @ordem_servico.ordem_servico_servicos.build
+    @ordem_servico.ordem_servico_pecas.build
+  end
 
-    def create
-      @ordem_servico = OrdemServico.new(ordem_servico_params)
+  def create
+    @ordem_servico = OrdemServico.new(ordem_servico_params)
 
-      # Certifique-se de que os IDs de peças e serviços existem
-      peca_ids = Array(params[:ordem_servico][:peca_ids]).reject(&:blank?)
-      servico_ids = Array(params[:ordem_servico][:servico_ids]).reject(&:blank?)
+    puts "Debug: ordem_servico_params=#{ordem_servico_params}"
 
-      # Adicione peças e serviços associados à ordem de serviço
-      @ordem_servico.pecas << Peca.find(peca_ids) unless peca_ids.empty?
-      @ordem_servico.servicos << Servico.find(servico_ids) unless servico_ids.empty?
-
-      calculate_valor_total(@ordem_servico)
-
-      if @ordem_servico.save
-        redirect_to @ordem_servico, notice: 'Ordem de Serviço criada com sucesso.'
-      else
-        render :new
-      end
-    end
-    def edit
-    end
-
-    def update_status
-      @ordem_servico = OrdemServico.find(params[:id])
-      new_status = params[:status]
-
-      if @ordem_servico.update(status: new_status)
-        redirect_to @ordem_servico, notice: 'Status atualizado com sucesso.'
-      else
-        render :edit
-      end
-    end
-
-    def update
-      # existing code...
-
-      if @ordem_servico.update(ordem_servico_params)
-        calculate_valor_total(@ordem_servico)
-
-        redirect_to @ordem_servico, notice: 'Ordem de Serviço atualizada com sucesso.'
-      else
-        render :edit
-      end
-    end
-
-    def destroy
-      @ordem_servico.destroy
-      redirect_to ordem_servicos_url, notice: 'Ordem de Serviço excluída com sucesso.'
-    end
-
-    private
-
-    def set_ordem_servico
-      @ordem_servico = OrdemServico.find(params[:id])
-    end
-
-    def load_associated_data
-      @veiculos = Veiculo.all
-      new_variable = @clientes = Cliente.all
-
+    if @ordem_servico.save
+      redirect_to ordem_servicos_path, notice: 'Ordem de Serviço criada com sucesso.'
+    else
       @servicos = Servico.all
-      @pecas = Peca.all
+      @veiculos = Veiculo.all
       @equipes = Equipe.all
-    end
-
-    def ordem_servico_params
-      params.require(:ordem_servico).permit(
-        :veiculo_id,
-        :problema_veiculo,
-        :equipe_id,
-        :valor,
-        :status,
-        servico_ids: [],
-        peca_ids: []
-      )
-    end
-
-    def calculate_valor_total(ordem_servico)
-      valor_total = 0
-
-      # Adicione o valor das peças associadas à ordem de serviço
-      ordem_servico.pecas.each do |peca|
-        valor_total += peca.preco.to_f
-      end
-
-      # Adicione o valor dos serviços associados à ordem de serviço
-      ordem_servico.servicos.each do |servico|
-        valor_total += servico.valor.to_f
-      end
-
-      ordem_servico.update(valor: valor_total)
+      render :new
     end
   end
+
+  def edit
+    @servicos = Servico.all
+    @equipes = Equipe.all
+  end
+
+  def update
+    params[:ordem_servico].delete(:veiculo_id) if params[:ordem_servico][:veiculo_id].present?
+
+    if @ordem_servico.update(ordem_servico_params)
+      redirect_to ordem_servicos_path, notice: 'Ordem de Serviço atualizada com sucesso.'
+    else
+      @servicos = Servico.all
+      @veiculos = Veiculo.all
+      @equipes = Equipe.all
+      render :edit
+    end
+  end
+
+  def destroy
+    @ordem_servico.destroy
+    redirect_to ordem_servicos_path, notice: 'Ordem de Serviço excluída com sucesso.'
+  end
+
+  def concluir
+    @ordem_servico.update(status: 'Concluída')
+    redirect_to ordem_servicos_path, notice: 'Ordem de Serviço concluída com sucesso.'
+  end
+
+  private
+
+  def set_ordem_servico
+    @ordem_servico = OrdemServico.find(params[:id])
+  end
+
+  def ordem_servico_params
+    params.require(:ordem_servico).permit(
+      :veiculo_id,
+      :equipe_id,
+      :problema,
+      :status,  # Add this line
+      ordem_servico_servicos_attributes: [:id, :servico_id, :_destroy],
+      ordem_servico_pecas_attributes: [:id, :peca_id, :quantidade, :_destroy]
+    )
+  end
+end

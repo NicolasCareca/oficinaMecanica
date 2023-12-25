@@ -2,8 +2,20 @@ class ClientesController < ApplicationController
   before_action :set_cliente, only: %i[ show edit update destroy ]
 
   def index
-    @clientes = Cliente.all
-    puts @clientes.inspect
+    @clientes = if params[:search]
+                  Cliente.where("nome LIKE ?", "%#{params[:search]}%")
+                else
+                  Cliente.all
+                end
+
+    @clientes = @clientes.order(:nome) if params[:order] == 'nome'
+    @clientes = @clientes.order(created_at: :desc) if params[:order] == 'creation_date_desc'
+    @clientes = @clientes.order(created_at: :asc) if params[:order] == 'creation_date_asc'
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -65,5 +77,5 @@ class ClientesController < ApplicationController
     def cliente_params
       params.require(:cliente).permit(:nome, :telefone, :email, :rg, :cpf)
     end
-    
+
 end

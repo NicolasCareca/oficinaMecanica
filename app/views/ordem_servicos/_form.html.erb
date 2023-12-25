@@ -1,88 +1,51 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-body">
-          <%= form_with(model: @ordem_servico, local: true, html: {class: 'needs-validation', novalidate: true}) do |form| %>
-            <div class="mb-3">
-              <%= form.label :veiculo_id, 'Veículo', class: 'form-label' %>
-              <%= form.collection_select :veiculo_id, @veiculos, :id, :placa, { prompt: 'Selecione um veículo', class: 'form-select' }, class: 'form-control' %>
-            </div>
-            <div class="mb-3">
-              <%= form.label :problema_veiculo, 'Problema do Veículo', class: 'form-label' %>
-              <%= form.text_area :problema_veiculo, class: 'form-control', placeholder: 'Descreva o problema do veículo...' %>
-            </div>
-            <div class="mb-3" id="pecas-container">
-              <div class="peca-fields">
-                <%= form.label "ordem_servico[peca_ids][]", 'Peça', class: 'form-label' %>
-                <%= form.collection_select "ordem_servico[peca_ids][]", @pecas, :id, :nome, { prompt: 'Selecione uma peça', class: 'form-select' }, class: 'form-control', id: 'ordem_servico_peca_id' %>
-                <%= link_to 'Remover', '#', class: 'remove-peca' %>
-              </div>
-            </div>
-            <%= link_to 'Adicionar Peça', '#', id: 'add-peca' %>
+<%= form_with(model: @ordem_servico, url: @ordem_servico.persisted? ? ordem_servico_path(@ordem_servico) : ordem_servicos_path, method: @ordem_servico.persisted? ? :patch : :post) do |form| %>
 
-            <!-- Adição de serviços dinâmicos -->
-            <div class="mb-3" id="servicos-container">
-              <div class="servico-fields">
-                <%= form.label "ordem_servico[servico_ids][]", 'Serviço', class: 'form-label' %>
-                <%= form.collection_select "ordem_servico[servico_ids][]", @servicos, :id, :nome, { prompt: 'Selecione um serviço', class: 'form-select' }, class: 'form-control', id: 'ordem_servico_servico_id' %>
-                <%= link_to 'Remover', '#', class: 'remove-servico' %>
-              </div>
-            </div>
-            <%= link_to 'Adicionar Serviço', '#', id: 'add-servico' %>
-
-            <div class="mb-3">
-              <%= form.label :equipe_id, 'Equipe', class: 'form-label' %>
-              <%= form.collection_select :equipe_id, @equipes, :id, :nome, { prompt: 'Selecione uma equipe', class: 'form-select' }, class: 'form-control' %>
-            </div>
-            
-            <div class="mb-3 text-center">
-              <%= form.submit 'Submit', class: 'btn btn-primary' %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
+  <div class="field">
+    <%= form.label :veiculo_id, 'Veículo' %>
+    <%= form.collection_select :veiculo_id, Veiculo.all, :id, :placa, { selected: @ordem_servico.veiculo_id }, { readonly: true, class: 'form-control' } %>
   </div>
+
+  <div class="field">
+    <%= form.label :equipe_id, 'Equipe' %>
+    <%= form.collection_select :equipe_id, Equipe.all, :id, :nome, { selected: @ordem_servico.equipe_id }, { readonly: true, class: 'form-control' } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :problema, 'Problema' %>
+    <%= form.text_area :problema, class: 'form-control' %>
+  </div>
+<div class="field">
+  <%= form.label :status, 'Status' %>
+  <%= form.select :status, ['Recebido', 'Andamento', 'Concluído'], { prompt: 'Selecione o status' }, { class: 'form-control' } %>
 </div>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const pecasContainer = document.getElementById('pecas-container');
-    const servicosContainer = document.getElementById('servicos-container');
-    const addPecaButton = document.getElementById('add-peca');
-    const addServicoButton = document.getElementById('add-servico');
 
-    let pecaCount = 0; // Contador para IDs únicos de peças
-    let servicoCount = 0; // Contador para IDs únicos de serviços
+  <% @ordem_servico.ordem_servico_servicos.each do |service| %>
+    <%= form.fields_for :ordem_servico_servicos, service do |service_fields| %>
+      <div class="field">
+        <%= service_fields.label :servico_id, 'Serviço' %>
+        <%= service_fields.collection_select :servico_id, Servico.all, :id, :nome, { prompt: 'Selecione um serviço' }, { class: 'form-control' } %>
+      </div>
+    <% end %>
+  <% end %>
 
-    addPecaButton.addEventListener('click', function (e) {
-      e.preventDefault();
+  <% @ordem_servico.ordem_servico_pecas.each do |part| %>
+    <%= form.fields_for :ordem_servico_pecas, part do |part_fields| %>
+      <div class="field">
+        <%= part_fields.label :peca_id, 'Peça' %>
+        <%= part_fields.collection_select :peca_id, Peca.all, :id, :nome, { prompt: 'Selecione uma peça' }, { class: 'form-control' } %>
+      </div>
 
-      const newPecaFields = document.querySelector('.peca-fields').cloneNode(true);
-      pecaCount++;
+      <div class="field">
+        <%= part_fields.label :quantidade, 'Quantidade' %>
+        <%= part_fields.number_field :quantidade, class: 'form-control' %>
+      </div>
+    <% end %>
 
-      const removePecaLink = newPecaFields.querySelector('.remove-peca');
-      removePecaLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        newPecaFields.remove();
-      });
 
-      pecasContainer.appendChild(newPecaFields);
-    });
+<% end %>
 
-    addServicoButton.addEventListener('click', function (e) {
-      e.preventDefault();
 
-      const newServicoFields = document.querySelector('.servico-fields').cloneNode(true);
-      servicoCount++;
-
-      const removeServicoLink = newServicoFields.querySelector('.remove-servico');
-      removeServicoLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        newServicoFields.remove();
-      });
-
-      servicosContainer.appendChild(newServicoFields);
-    });
-  });
-</script>
+  <div class="actions">
+    <%= form.submit 'Cadastrar' %>
+  </div>
+<% end %>

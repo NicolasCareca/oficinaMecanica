@@ -1,26 +1,51 @@
-<div class="container mt-4">
-  <h1 class="mb-4">Ordem de Serviço</h1>
-  <div class="card col-6 mx-auto">
-    <div class="card-body">
-     <p class="mb-1"><strong>Veículo:</strong> <%= @ordem_servico.veiculo&.placa %></p>
-  <p class="mb-1"><strong>Modelo:</strong> <%= @ordem_servico.veiculo&.modelo %></p>
-  <p class="mb-1"><strong>Cor:</strong> <%= @ordem_servico.veiculo&.cor %></p>
-  <p class="mb-1"><strong>Dono:</strong> <%= @ordem_servico.veiculo&.cliente&.nome %></p>
-  <p class="mb-1"><strong>Telefone de Contato:</strong> <%= @ordem_servico.veiculo&.cliente&.telefone %></p>
-  <p class="mb-1"><strong>Problema do Veículo:</strong> <%= @ordem_servico.problema_veiculo %></p>
-      <% @ordem_servico.servicos.each do |servico| %>
-  <p class="mb-1"><strong>Serviço:</strong> <%= servico.nome %></p>
-<% end %>
+ <div class="container mt-4">
+  <a href="<%= ordem_servicos_path %>" class="btn btn-danger mb-3">Voltar</a>
+    <div class="card mb-5">
+      <div class="card-header bg-primary text-white">
+        <h1 class="card-title">Ordem de Serviço</h1>
+      </div>
+      <div class="card-body">
 
-     <% @ordem_servico.pecas.each do |peca| %>
-  <p class="mb-1"><strong>Peça:</strong> <%= peca.nome %></p>
-<% end %>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <p><strong>Status:</strong> <%= @ordem_servico.status %></p>
+            <p><strong>Veículo:</strong> <%= @ordem_servico.veiculo.placa %></p>
+            <p><strong>Dono:</strong> <%= @ordem_servico.veiculo.cliente.nome %></p>
+            <p><strong>Telefone:</strong> <%= @ordem_servico.veiculo.cliente.telefone %></p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Problema:</strong> <%= @ordem_servico.problema %></p>
+            <p><strong>Equipe:</strong> <%= @ordem_servico.equipe.nome %></p>
+          </div>
+        </div>
 
+        <div class="invoice-details bg-info text-white p-3">
+          <p>Data de criação: <%= @ordem_servico.created_at.strftime("%d/%m/%Y") %></p>
+          <p>Data de conclusão: <%= @ordem_servico.updated_at.strftime("%d/%m/%Y") %></p>
+        </div>
 
-      <p class="mb-1"><strong>Equipe:</strong> <%= @ordem_servico.equipe.nome %></p>
-      <p class="mb-1"><strong>Valor:</strong> <%= number_to_currency(@ordem_servico.valor) %></p>
-      <%= link_to 'Voltar', ordem_servicos_path, class: 'btn btn-secondary mt-3' %>
+        <div class="invoice-section mt-3">
+          <h2 class="mt-4">Serviços</h2>
+          <% @ordem_servico.servicos.each do |servico| %>
+            <p><strong>Serviço:</strong> <%= servico.nome %> - <%= number_to_currency(servico.valor) %></p>
+          <% end %>
+        </div>
 
+        <div class="invoice-section mt-3">
+          <h2 class="mt-4">Peças</h2>
+          <% @ordem_servico.pecas.each do |peca| %>
+            <p><strong>Peça:</strong> <%= peca.nome %> - Quantidade: <%= peca.ordem_servico_pecas.first.quantidade %> - <%= number_to_currency(peca.preco) %></p>
+          <% end %>
+        </div>
+
+        <div class="total-container mt-4 bg-light p-3">
+          <h2>Total:</h2>
+          <p><strong>Valor Total:</strong> <%= number_to_currency(@ordem_servico.valor_total) %></p>
+        </div>
+
+       <%= button_to "Deletar", ordem_servico_path(@ordem_servico), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger mt-3 mb-3", style: 'margin-left: 5px;' %>
+
+      </div>
     </div>
   </div>
-</div>
+  
