@@ -20,27 +20,27 @@
         <!-- Campos do formulário -->
         <div class="form-group">
           <%= form.label :modelo %>
-          <%= form.text_field :modelo, class: "form-control" %>
+          <%= form.text_field :modelo, class: "form-control", required: true %>
         </div>
 <div class="form-group">
           <%= form.label :ano %>
-          <%= form.text_field :ano, class: "form-control" %>
+          <%= form.text_field :ano, class: "form-control", required: true %>
         </div>
 
         <div class="form-group">
           <%= form.label :placa %>
-          <%= form.text_field :placa, class: "form-control" %>
+          <%= form.text_field :placa, class: "form-control", required: true %>
         </div>
 
         <div class="form-group">
           <%= form.label :cor %>
-          <%= form.text_field :cor, class: "form-control" %>
+          <%= form.text_field :cor, class: "form-control", required: true %>
         </div>
 
-        <div class="form-group">
-          <%= form.label :cliente_id %>
-          <%= form.collection_select(:cliente_id, @clientes, :id, :nome, { prompt: true }, { class: "form-control" }) %>
-        </div>
+      <div class="form-group">
+  <%= form.label :cliente_id, class: "control-label" %>
+  <%= form.collection_select(:cliente_id, @clientes, :id, :nome, { prompt: 'Selecione o cliente' }, { class: 'form-control', required: true }) %>
+</div>
 
         
          <div class="form-group mt-3 text-center"> 

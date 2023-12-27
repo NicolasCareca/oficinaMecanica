@@ -22,7 +22,7 @@ class VeiculosController < ApplicationController
   def create
     Rails.logger.debug(params.inspect)
     @veiculo = Veiculo.new(veiculo_params)
-
+    @clientes = Cliente.all
     respond_to do |format|
       if @veiculo.save
         format.html { redirect_to veiculo_url(@veiculo), notice: 'Veiculo criado com sucesso.' }
