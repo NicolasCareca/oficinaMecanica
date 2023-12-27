@@ -5,10 +5,11 @@
     <div class="card-body">
       <%= form_with(model: @ordem_servico, url: @ordem_servico.persisted? ? ordem_servico_path(@ordem_servico) : ordem_servicos_path, method: @ordem_servico.persisted? ? :patch : :post, html: { class: 'needs-validation', novalidate: true }) do |form| %>
 
-        <div class="mb-3">
-          <%= form.label :veiculo_id, 'Veículo', class: 'form-label' %>
-          <%= form.collection_select :veiculo_id, Veiculo.all, :id, :placa, { selected: @ordem_servico.veiculo_id }, { readonly: true, class: 'form-control' } %>
-        </div>
+       <div class="mb-3">
+  <%= form.label :veiculo_id, 'Veículo', class: 'form-label' %>
+  <%= form.collection_select :veiculo_id, Veiculo.all, :id, :placa, { selected: @ordem_servico.veiculo_id }, { readonly: true, class: 'form-control js-example-basic-single' } %>
+</div>
+
 
         <div class="mb-3">
           <%= form.label :equipe_id, 'Equipe', class: 'form-label' %>
@@ -20,19 +21,23 @@
           <%= form.text_area :problema, class: 'form-control' %>
         </div>
 
-        <div class="mb-3">
-          <%= form.label :status, 'Status', class: 'form-label' %>
-          <%= form.select :status, ['Recebido', 'Andamento', 'Concluído'], { prompt: 'Selecione o status' }, { class: 'form-control' } %>
-        </div>
+       <div class="mb-3">
+        <% if @exibir_campos_servico_e_peca || @ordem_servico.persisted? %>
+            <%= form.label :status, 'Status', class: 'form-label' %>
+            <%= form.select :status, ['Espera', 'Andamento', 'Concluído'], { prompt: 'Selecione o status' }, { class: 'form-control' } %>
+        <% end %>
+            </div>
+
 
         <% if @exibir_campos_servico_e_peca && @ordem_servico.persisted? %>
+        <h2>Serviços</h2>
           <%= form.fields_for :ordem_servico_servicos do |service_fields| %>
             <div class="mb-3">
               <%= service_fields.label :servico_id, 'Serviço', class: 'form-label' %>
               <%= service_fields.collection_select :servico_id, Servico.all, :id, :nome, { prompt: 'Selecione um serviço' }, { class: 'form-control' } %>
             </div>
           <% end %>
-
+    <h2>Peças</h2>
           <%= form.fields_for :ordem_servico_pecas do |part_fields| %>
             <div class="mb-3">
               <%= part_fields.label :peca_id, 'Peça', class: 'form-label' %>
@@ -64,3 +69,31 @@
     </div>
   </div>
 </div>
+<!-- Adicione os arquivos CSS e JS do Select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('.js-example-basic-single').select2({
+      minimumInputLength: 3,
+      ajax: {
+        url: '/ordem_servicos/search_veiculos',
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return {
+            q: params.term,
+            page: params.page
+          };
+        },
+        processResults: function (data) {
+          return {
+            results: data
+          };
+        },
+        cache: true
+      }
+    });
+  });
+</script>

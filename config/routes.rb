@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
 
 
-  resources :ordem_servicos
+  # config/routes.rb
+resources :ordem_servicos do
+  collection do
+    get 'search_veiculos'
+  end
+end
+
   resources :equipes
   resources :veiculos
+
   resources :mecanicos
   resources :pecas
   resources :servicos
@@ -15,6 +22,6 @@ Rails.application.routes.draw do
     post '/users/sign_in', to: 'devise/sessions#create'
     get '/users/sign_out', to: 'devise/sessions#destroy'
   end
-  get 'pages/home'
-  root 'pages#home'
+  get 'ordem_servicos/index'
+  root 'ordem_servicos#index'
 end

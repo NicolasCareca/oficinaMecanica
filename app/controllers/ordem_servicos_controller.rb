@@ -7,7 +7,7 @@ class OrdemServicosController < ApplicationController
   end
 
   def show
-    # Adicione aqui qualquer lógica adicional necessária para exibir uma ordem de serviço
+
   end
 
   def new
@@ -82,5 +82,10 @@ class OrdemServicosController < ApplicationController
       ordem_servico_servicos_attributes: [:id, :servico_id, :_destroy],
       ordem_servico_pecas_attributes: [:id, :peca_id, :quantidade, :_destroy]
     )
+  end
+  def search_veiculos
+    term = params[:q]
+    veiculos = Veiculo.where('placa LIKE ?', "%#{term}%").limit(10)
+    render json: veiculos.to_json(only: [:id, :placa])
   end
 end
